@@ -1,11 +1,35 @@
+const fs = require('fs');
+
+class Gif {
+	/**
+	 *
+	 * @param {Object} opts options
+	 */
+	constructor(opts) {
+		this.gifs = JSON.parse(fs.readFileSync('./gifs.json'));
+	}
+
+	/**
+	 *
+	 * @param {Object} opts
+	 * @param {String} opts.type
+	 * @param {String} opts.gifURL
+	 */
+	addGif(opts) {
+		if (!opts.type || !opts.gifURL) throw new Error('Parameters missing');
+		this.gifs[opts.type].push(opts.gifURL);
+		fs.writeFileSync('./gifs.json', JSON.stringify(this.gifs, null, 2));
+	}
+}
+
 const { time, clear } = require('console');
 const { Client, Intents, Permissions } = require('discord.js');
 const Discord = require('discord.js');
-const fs = require('fs');
 const NekoClient = require('nekos.life');
 const aflb = require('aflb');
 const aflbClient = new aflb();
 const Canvas = require('canvas');
+const Gifcmd = new Gif();
 require('dotenv').config;
 
 //!gifs
@@ -128,6 +152,20 @@ client.on('messageCreate', async (message) => {
 	}
 	if (command == 'ban') {
 		ban(message, author, guild, channel, args);
+	}
+
+	//!moderation bot commands
+	if (command == 'add') {
+		if (author != '676503697252941856' || author != '915682058066608128		')
+			return channel.send("You can't do that");
+		if (!args) return channel.send('No args');
+		let type = args[0];
+		let gifURL = args[1];
+		if (!type || !gifURL) return channel.send('Missing arg');
+
+		Gifcmd.addGif({ type, gifURL });
+
+		channel.send(`Added ${gifURL} to ${type}`);
 	}
 
 	//!others
