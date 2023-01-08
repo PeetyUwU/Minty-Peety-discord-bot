@@ -1,4 +1,5 @@
 const EventEmitter = require('events');
+const fs = require('fs');
 
 /**
  * @typedef {"add"} Events
@@ -24,16 +25,55 @@ class UsersManager extends EventEmitter {
 		this.users = JSON.parse(fs.readFileSync(this.fileName));
 	}
 
+	checkUser(member) {
+		let foundUser = false;
+		this.users.forEach((user) => {
+			if (user.id == member.user.id) return (foundUser = true);
+		});
+
+		if (foundUser == false) {
+			this.add(member, { tag: member.user.tag });
+		}
+	}
+
 	/**
 	 *
 	 * @param {Object} member
 	 * @param {Object} [opts]
+	 * @param {String} opts.tag
 	 */
 	add(member, opts = {}) {
-		let user = new User(member.user.id, member.guild, opts);
+		let user = new User(member);
 		this.users.push(user);
 		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
 	}
+
+	/**
+	 *
+	 * @param {String} id user id
+	 * @param {"guessAnime"} game game
+	 */
+	addNyanlings(id, game) {
+		let user = new User(...this.users.filter((user) => user.id == id));
+		this.users = this.users.filter((user) => user.id != id);
+
+		user.addNyanlings(game);
+
+		this.users.push(user);
+
+		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
+	}
+
+	/**
+	 *
+	 * @param {String} id author id
+	 */
+	getNyanlings(id) {
+		let user = new User(...this.users.filter((user) => user.id == id));
+		return user.nyanlings;
+	}
+
+	updateUser(id, user) {}
 
 	/**
 	 * Registers a listener for a specific event.
@@ -62,17 +102,26 @@ class User {
 	 * @param {String} guild id of a guild
 	 * @param {Object} [opts]
 	 */
-	constructor(id, guild, opts = {}) {
-		if (!id) throw 'Missing parameters';
+	constructor(member) {
+		if (!member) throw 'Missing parameters';
 
-		this.id = id;
-		this.marry = '';
-		this.guilds = [];
-		this.nyanlings = 0;
+		let guild;
+		if (member.guild) {
+			guild = [member.guild.id];
+		} else {
+			guild = member.guilds;
+		}
+		let games = member.games || {};
+		let user = member.user || {};
+
+		this.id = member.id;
+		this.marry = member.marry || '';
+		this.guilds = [...guild];
+		this.nyanlings = member.nyanlings || 0;
+		this.gainBoost = member.gainBoost || 1;
+		this.tag = member.tag || user.tag || '';
 		this.games = {
 			guessAnime: {
-				win: 0,
-				loose: 0,
 				winPrice: 10,
 			},
 		};
@@ -83,6 +132,16 @@ class User {
 	marry() {}
 
 	divorce() {}
+
+	/**
+	 *
+	 * @param {"guessAnime"} game game
+	 * @returns
+	 */
+	addNyanlings(game) {
+		this.nyanlings += this.gainBoost * this.games[game].winPrice;
+		return this;
+	}
 }
 
 module.exports = UsersManager;

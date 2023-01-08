@@ -31,6 +31,9 @@ const EventEmitter = require('events');
 const { Bot, EventList } = require('./modules/botManager.js');
 const { getAnime } = require('./modules/guessAnime.js');
 
+const UsersManager = require('./modules/usersManager.js');
+let userManager = new UsersManager();
+
 require('dotenv').config();
 
 const config = JSON.parse(fs.readFileSync('./config.json'));
@@ -85,7 +88,9 @@ client.on('ready', () => {
 	console.log('Bot is ready!   ' + client.user.tag);
 
 	client.guilds.cache.each((guild) => {
-		guild.members.cache.forEach((member) => {});
+		guild.members.cache.forEach((member) => {
+			userManager.checkUser(member);
+		});
 	});
 
 	const arrayOfStatus = [
@@ -117,21 +122,21 @@ client.on('ready', () => {
 client.on('guildMemberAdd', (member) => {
 	getCanvas(member);
 
-	let humanRole = member.guild.roles.cache.find(
-		(role) => role.name === 'Human'
-	);
-	let aboutMeRole = member.guild.roles.cache.find(
-		(role) => role.name === '---- About me ----'
-	);
-	let gamesRole = member.guild.roles.cache.find(
-		(role) => role.name === '---- Games ----'
-	);
-	member.roles.add([humanRole, aboutMeRole, gamesRole]);
+	// let humanRole = member.guild.roles.cache.find(
+	// 	(role) => role.name === 'Human'
+	// );
+	// let aboutMeRole = member.guild.roles.cache.find(
+	// 	(role) => role.name === '---- About me ----'
+	// );
+	// let gamesRole = member.guild.roles.cache.find(
+	// 	(role) => role.name === '---- Games ----'
+	// );
+	// member.roles.add([humanRole, aboutMeRole, gamesRole]);
 
 	member.guild.members.cache.each((member) => {
 		if (member.user.bot) return;
 
-		console.log(member.user.tag);
+		userManager.checkUser(member);
 	});
 });
 
@@ -191,6 +196,11 @@ client.on('messageCreate', async (message) => {
 	//!help command
 	else if (command == 'help') {
 		help(message, author, guild, channel, args);
+	}
+
+	//! economy commands
+	else if (command == 'nyanlings' || command == 'cash') {
+		nyanlings(message, author, guild, channel, args);
 	}
 
 	//!moderation commands
@@ -1167,7 +1177,7 @@ client.on('messageCreate', async (message) => {
 				});
 			});
 		});
-	} else if (command == 'startguessanime') {
+	} else if (command == 'guessanime') {
 		let anime = GuessAnime.getRandomAnime();
 
 		if (anime.gameType == 'Guess anime by picture') {
@@ -1211,6 +1221,7 @@ client.on('messageCreate', async (message) => {
 			});
 
 			collector.on('collect', (collected) => {
+				userManager.addNyanlings(collected.author.id, 'guessAnime');
 				channel.send(`${collected.author} has won!`);
 			});
 
@@ -1266,6 +1277,7 @@ client.on('messageCreate', async (message) => {
 			});
 
 			collector.on('collect', (collected) => {
+				userManager.addNyanlings(collected.author.id, 'guessAnime');
 				channel.send(`${collected.author} has won!`);
 			});
 
@@ -1901,7 +1913,7 @@ async function hentai(message, author, guild, channel, args) {
 function help(message, author, guild, channel, args) {
 	let Embed = new EmbedBuilder({
 		color: 0xff0000,
-		title: 'Mewmew commands',
+		title: 'Peety commands',
 		thumbnail: { url: 'https://i.imgur.com/qRFFT4T.jpg' },
 		fields: [
 			{ name: 'Emotes', value: '`blush`, `cry`, `smile`, `smug`' },
@@ -1912,9 +1924,11 @@ function help(message, author, guild, channel, args) {
 			{ name: '🎵Music', value: '`play`, `queue`, `skip`, `stop`' },
 			// { name: '🎭Actions (NSFW)', value: '||`hentai`||,' },
 			{ name: '⚙️Moderation', value: '`kick`, `ban`, `clear`' },
+			{ name: '🎲Games', value: '`guessanime`,' },
+			{ name: '💰Economy', value: '`nyanlings`, `cash`' },
 			{
 				name: 'Others',
-				value: '`marry`, `divorce`, `rdnumber`, `startguessanime`, `help`',
+				value: '`marry`, `divorce`, `rdnumber`, `help`',
 			},
 		],
 	});
@@ -2023,6 +2037,11 @@ function divorce(message, author, guild, channel, args) {
 	// 		return channel.send(`You're aleady married to <@${m.ask}>`);
 	// 	}
 	// }
+}
+
+function nyanlings(message, author, guild, channel, args) {
+	let nyanlings = userManager.getNyanlings(author.id);
+	return message.reply(`You have ${nyanlings} Nyanlings🪙`);
 }
 
 function rdnumber(message, author, guild, channel, args) {

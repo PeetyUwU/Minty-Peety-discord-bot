@@ -1,1 +1,1037 @@
-[{ "id": "123", "marry": "test" }]
+[
+  {
+    "id": "508296979823198219",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "BoB#3237",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "547774457809469450",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Míra#3139",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "625701219750510611",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "frantiq<3#3290",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "724442149701287937",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "SMGPDBGMCB#0001",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "749308201924690000",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Marti#4156",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "781797351882227732",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Nora<3#6196",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "811205997540016148",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Peety#0977",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "815291210699636737",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Fedys#4906",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "850475346725830676",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Peety(testing account)#0271",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "159985870458322944",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "MEE6#4876",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "204255221017214977",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "YAGPDB.xyz#8760",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "235148962103951360",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Carl-bot#1536",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "270904126974590976",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Dank Memer#5192",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "292953664492929025",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "UnbelievaBoat#1046",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "475746232082628608",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "baddog2026#7938",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "490707751832649738",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "TacoShack#6998",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "509041039340863490",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Reactions#1564",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "748729585629265970",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "kilkoz#2349",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "800383254389194754",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Rocket Gambling Bot#1075",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "825776133122949181",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Deleted User 40b84349#5704",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "899577679907520543",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Rioxy#3544",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "924029587141316638",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "aki<3#3984",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "950099023036039258",
+    "marry": "",
+    "guilds": [
+      "879588233783181322"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Hydrx🤍#7985",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "865968795955888149",
+    "marry": "",
+    "guilds": [
+      "880855960283922432"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Deleted User 181170cb#2113",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "807343850016342047",
+    "marry": "",
+    "guilds": [
+      "900775356762562611"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Bonynyie#0391",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "926251525393760306",
+    "marry": "",
+    "guilds": [
+      "900775356762562611"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "test bot Peety#8303",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "935984767919341571",
+    "marry": "",
+    "guilds": [
+      "900775356762562611"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Akiii#9100",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "453510285433503754",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Setup#6015",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "469233605835489330",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Automator#0486",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "654817820093186048",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Hydro#5493",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "658515610359037971",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Ms. OwOs A Lot#6272",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "691739552204980224",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Average#9603",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "803372421222629386",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "remote_citizen5#7918",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "928648853664694312",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "deathofLHMjr#9076",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "929089884310896640",
+    "marry": "",
+    "guilds": [
+      "926464783274885160"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "cappuccino said hi#2334",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "909901412140458004",
+    "marry": "",
+    "guilds": [
+      "926589162516267059"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Liberty.xx#2672",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "416358583220043796",
+    "marry": "",
+    "guilds": [
+      "949775610077651006"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Xenon#7325",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "537011515014774785",
+    "marry": "",
+    "guilds": [
+      "949775610077651006"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "ALICE#1830",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "824699240701493279",
+    "marry": "",
+    "guilds": [
+      "997047264679829584"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Kello#4006",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "997046678043504720",
+    "marry": "",
+    "guilds": [
+      "997047264679829584"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Mewmew#7796",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "936929561302675456",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Midjourney Bot#9282",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "829426058855448616",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "ondikk#6339",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "766245283528310824",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Tom2004#0037",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "353527483875721216",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Kimochii Seppo#5321",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "828193512066514944",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "asi_maja#1070",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "592056978172280872",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Kajoj's 暨 ツ#2258",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "991045255484809346",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Boxer99#4811",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "785569370373619802",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "kapr#8762",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "523860961375944704",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "sugoischi.zofrenikk#9098",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "166131246836088832",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "「Dvojnik2」#5165",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1041449034910548058",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Danushka#4104",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "693159350742548500",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "cooooo#2678",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "155149108183695360",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Dyno#3861",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "498084769838399498",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Adelie#9386",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "341175930179551242",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Mikismiki#2827",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "779259566243184650",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "b0un3s#5578",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "458276816071950337",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "ServerStats#0197",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "289066747443675143",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "owo#0498",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "294922308827480064",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "rapid01#4825",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "419906247190511617",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Šmoula#0955",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "765491719932215297",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "andyy#2154",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "160105994217586689",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Miki#6045",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "827926623163777135",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "HentaiCord#4075",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "282859044593598464",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "ProBot ✨#5803",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "769109930929815563",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Bibi#0297",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "666334134439772171",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Sensey#0727",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "216664236569526272",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "McBet.toMcdonaldsOhioManager#1645",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "408785106942164992",
+    "marry": "",
+    "guilds": [
+      "1023138812278353961"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "OwO#8456",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "676503697252941856",
+    "marry": "",
+    "guilds": [
+      "766292172894371861"
+    ],
+    "nyanlings": 30,
+    "gainBoost": 1,
+    "tag": "Peety 418#7721",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  }
+]
