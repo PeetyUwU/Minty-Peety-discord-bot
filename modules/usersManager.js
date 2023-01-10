@@ -23,12 +23,19 @@ class UsersManager extends EventEmitter {
 		super();
 		this.fileName = opts.fileName || './database/users.json';
 		this.users = JSON.parse(fs.readFileSync(this.fileName));
+		this.games = ['Guess anime'];
 	}
 
 	checkUser(member) {
 		let foundUser = false;
 		this.users.forEach((user) => {
-			if (user.id == member.user.id) return (foundUser = true);
+			if (user.id == member.user.id) {
+				if (!user.guilds.includes(member.guild.id)) {
+					user.guilds.push(member.guild.id);
+				}
+				foundUser = true;
+				return;
+			}
 		});
 
 		if (foundUser == false) {
@@ -45,7 +52,7 @@ class UsersManager extends EventEmitter {
 	add(member, opts = {}) {
 		let user = new User(member);
 		this.users.push(user);
-		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
+		this.updateDatabase();
 	}
 
 	/**
@@ -54,14 +61,14 @@ class UsersManager extends EventEmitter {
 	 * @param {"guessAnime"} game game
 	 */
 	addNyanlings(id, game) {
-		let user = new User(...this.users.filter((user) => user.id == id));
-		this.users = this.users.filter((user) => user.id != id);
+		let user = this.getUser(id);
+		let count = user.gainBoost * user.games[game].winPrice;
+		user.nyanlings += count;
+		this.users = this.users.map((u) => (u.id === id ? user : u));
 
-		user.addNyanlings(game);
+		this.updateDatabase();
 
-		this.users.push(user);
-
-		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
+		return count;
 	}
 
 	/**
@@ -69,11 +76,19 @@ class UsersManager extends EventEmitter {
 	 * @param {String} id author id
 	 */
 	getNyanlings(id) {
-		let user = new User(...this.users.filter((user) => user.id == id));
+		let user = this.getUser(id);
 		return user.nyanlings;
 	}
 
 	updateUser(id, user) {}
+
+	getUser(userId) {
+		return this.users.find((user) => user.id === userId);
+	}
+
+	updateDatabase() {
+		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
+	}
 
 	/**
 	 * Registers a listener for a specific event.
@@ -132,16 +147,6 @@ class User {
 	marry() {}
 
 	divorce() {}
-
-	/**
-	 *
-	 * @param {"guessAnime"} game game
-	 * @returns
-	 */
-	addNyanlings(game) {
-		this.nyanlings += this.gainBoost * this.games[game].winPrice;
-		return this;
-	}
 }
 
 module.exports = UsersManager;

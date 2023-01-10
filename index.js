@@ -29,7 +29,6 @@ const distube = require('distube');
 const EventEmitter = require('events');
 
 const { Bot, EventList } = require('./modules/botManager.js');
-const { getAnime } = require('./modules/guessAnime.js');
 
 const UsersManager = require('./modules/usersManager.js');
 let userManager = new UsersManager();
@@ -201,6 +200,13 @@ client.on('messageCreate', async (message) => {
 	//! economy commands
 	else if (command == 'nyanlings' || command == 'cash') {
 		nyanlings(message, author, guild, channel, args);
+	}
+
+	//! games commands
+	else if (command == 'games') {
+		games();
+	} else if (command == 'guessanime') {
+		guessAnime(message, author, guild, channel, args);
 	}
 
 	//!moderation commands
@@ -1177,117 +1183,6 @@ client.on('messageCreate', async (message) => {
 				});
 			});
 		});
-	} else if (command == 'guessanime') {
-		let anime = GuessAnime.getRandomAnime();
-
-		if (anime.gameType == 'Guess anime by picture') {
-			const filter = (message, user) => {
-				let array1 = message.content.trim().toLowerCase().split(' ');
-				let array2 = anime.name.trim().toLowerCase().split(' ');
-
-				array1 = array1.filter((element) => {
-					return element !== '' && element !== ' ';
-				});
-
-				array2 = array2.filter((element) => {
-					return element != '' && element != ' ';
-				});
-
-				array1.sort();
-				array2.sort();
-
-				let sortedString1 = array1.join(' ');
-				let sortedString2 = array2.join(' ');
-
-				if (sortedString1 == sortedString2) return true;
-				else return false;
-			};
-
-			let Embed = new EmbedBuilder({
-				color: 0xff0000,
-				title: 'Guess the anime',
-				description: 'You have 20 seconds to guess the anime!',
-				fields: [
-					{ name: 'Anime list: ', value: GuessAnime.getAnimeList() },
-				],
-			});
-			Embed.setImage(anime.picture);
-			channel.send({ embeds: [Embed] });
-
-			let collector = new Discord.MessageCollector(channel, {
-				filter: filter,
-				time: 20000,
-				max: 1,
-			});
-
-			collector.on('collect', (collected) => {
-				userManager.addNyanlings(collected.author.id, 'guessAnime');
-				channel.send(`${collected.author} has won!`);
-			});
-
-			collector.on('end', (collected) => {
-				if (collected.size == 0)
-					return channel.send(
-						`No-one won! The anime was ${anime.name}`
-					);
-			});
-		} else if (anime.gameType == 'Guess character by picture') {
-			const filter = (message, user) => {
-				let array1 = message.content.trim().toLowerCase().split(' ');
-				let array2 = anime.character.name
-					.trim()
-					.toLowerCase()
-					.split(' ');
-
-				array1 = array1.filter((element) => {
-					return element !== '' && element !== ' ';
-				});
-
-				array2 = array2.filter((element) => {
-					return element != '' && element != ' ';
-				});
-
-				array1.sort();
-				array2.sort();
-
-				let sortedString1 = array1.join(' ');
-				let sortedString2 = array2.join(' ');
-
-				if (sortedString1 == sortedString2) return true;
-				else return false;
-			};
-
-			let Embed = new EmbedBuilder({
-				color: 0xff0000,
-				title: `Guess the character from ${anime.name}`,
-				description: 'You have 20 seconds to guess the anime!',
-				fields: [
-					{
-						name: 'Character list: ',
-						value: GuessAnime.getAnimeCharacters(anime.name),
-					},
-				],
-			});
-			Embed.setImage(anime.character.picture);
-			channel.send({ embeds: [Embed] });
-			let collector = new Discord.MessageCollector(channel, {
-				filter: filter,
-				time: 20000,
-				max: 1,
-			});
-
-			collector.on('collect', (collected) => {
-				userManager.addNyanlings(collected.author.id, 'guessAnime');
-				channel.send(`${collected.author} has won!`);
-			});
-
-			collector.on('end', (collected) => {
-				if (collected.size == 0)
-					return channel.send(
-						`No-one won! The character was ${anime.character.name}`
-					);
-			});
-		}
 	}
 	//?
 	else if (command == 'creategif') {
@@ -1321,8 +1216,6 @@ client.on('messageCreate', async (message) => {
 		skip(message, author, guild, channel, args);
 	} else if (command == 'stop') {
 		stop(message, author, guild, channel, args);
-	} else if (command == 'guessAnime') {
-		guessAnime(message, author, guild, channel, args);
 	}
 });
 
@@ -2043,6 +1936,15 @@ function nyanlings(message, author, guild, channel, args) {
 	let nyanlings = userManager.getNyanlings(author.id);
 	return message.reply(`You have ${nyanlings} Nyanlings🪙`);
 }
+function games(message, author, guild, channel, args) {
+	let list = [];
+	userManager.games.forEach((game) => {
+		list.push(`**\`${game}\`**`);
+	});
+
+	list.join(', ');
+	return channel.send(list);
+}
 
 function rdnumber(message, author, guild, channel, args) {
 	let number = Math.round(Math.random() * 100);
@@ -2085,7 +1987,118 @@ function stop(message, author, guild, channel, args) {
 	}
 }
 
-function guessAnime(message, author, guild, channel, args) {}
+function guessAnime(message, author, guild, channel, args) {
+	let anime = GuessAnime.getRandomAnime();
+
+	if (anime.gameType == 'Guess anime by picture') {
+		const filter = (message, user) => {
+			let array1 = message.content.trim().toLowerCase().split(' ');
+			let array2 = anime.name.trim().toLowerCase().split(' ');
+
+			array1 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+
+			array2 = array2.filter((element) => {
+				return element != '' && element != ' ';
+			});
+
+			array1.sort();
+			array2.sort();
+
+			let sortedString1 = array1.join(' ');
+			let sortedString2 = array2.join(' ');
+
+			if (sortedString1 == sortedString2) return true;
+			else return false;
+		};
+
+		let Embed = new EmbedBuilder({
+			color: 0xff0000,
+			title: 'Guess the anime',
+			description: 'You have 20 seconds to guess the anime!',
+			fields: [
+				{ name: 'Anime list: ', value: GuessAnime.getAnimeList() },
+			],
+		});
+		Embed.setImage(anime.picture);
+		channel.send({ embeds: [Embed] });
+
+		let collector = new Discord.MessageCollector(channel, {
+			filter: filter,
+			time: 20000,
+			max: 1,
+		});
+
+		collector.on('collect', (collected) => {
+			let count = userManager.addNyanlings(
+				collected.author.id,
+				'guessAnime'
+			);
+			channel.send(
+				`${collected.author} has won! Adding \`${count}\` nyanlings🪙`
+			);
+		});
+
+		collector.on('end', (collected) => {
+			if (collected.size == 0)
+				return channel.send(`No-one won! The anime was ${anime.name}`);
+		});
+	} else if (anime.gameType == 'Guess character by picture') {
+		const filter = (message, user) => {
+			let array1 = message.content.trim().toLowerCase().split(' ');
+			let array2 = anime.character.name.trim().toLowerCase().split(' ');
+
+			array1 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+
+			array2 = array2.filter((element) => {
+				return element != '' && element != ' ';
+			});
+
+			array1.sort();
+			array2.sort();
+
+			let sortedString1 = array1.join(' ');
+			let sortedString2 = array2.join(' ');
+
+			if (sortedString1 == sortedString2) return true;
+			else return false;
+		};
+
+		let Embed = new EmbedBuilder({
+			color: 0xff0000,
+			title: `Guess the character from ${anime.name}`,
+			description: 'You have 20 seconds to guess the anime!',
+			fields: [
+				{
+					name: 'Character list: ',
+					value: GuessAnime.getAnimeCharacters(anime.name),
+				},
+			],
+		});
+		Embed.setImage(anime.character.picture);
+		channel.send({ embeds: [Embed] });
+		let collector = new Discord.MessageCollector(channel, {
+			filter: filter,
+			time: 20000,
+			max: 1,
+		});
+
+		collector.on('collect', (collected) => {
+			userManager.addNyanlings(collected.author.id, 'guessAnime');
+			channel.send(`${collected.author} has won!`);
+		});
+
+		collector.on('end', (collected) => {
+			if (collected.size == 0)
+				return channel.send(
+					`No-one won! The character was ${anime.character.name}`
+				);
+		});
+	}
+}
 
 clientDistube.on('playSong', (queue, song) => {
 	queue.textChannel.send(
