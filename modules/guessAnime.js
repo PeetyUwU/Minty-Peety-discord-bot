@@ -71,7 +71,23 @@ class GuessAnime {
 
 		let animeFound = false;
 		for (let gA of GuessAnime.GUESSANIMEFILE) {
-			if (gA.name == opts.name) {
+			let array1 = opts.name.trim().toLowerCase().split(' ');
+			let array2 = gA.name.trim().toLowerCase().split(' ');
+
+			array1 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+			array2 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+
+			array1.sort();
+			array2.sort();
+
+			let sortedString1 = array1.join(' ');
+			let sortedString2 = array2.join(' ');
+
+			if (sortedString2 == sortedString1) {
 				animeFound = true;
 				for (let ch of gA.characters) {
 					opts.characters = opts.characters.filter(
@@ -130,7 +146,7 @@ class GuessAnime {
 			animeList.push(`**\`${gA.name}\`**`);
 		});
 
-		return animeList.join(', ');
+		return animeList.sort((a, b) => 0.5 - Math.random()).join(', ');
 	}
 	/**
 	 *
@@ -140,7 +156,22 @@ class GuessAnime {
 		let characters;
 		let animeFound = false;
 		GuessAnime.GUESSANIMEFILE.forEach((a) => {
-			if (a.name == anime) {
+			let array1 = anime.trim().toLowerCase().split(' ');
+			let array2 = a.name.trim().toLowerCase().split(' ');
+
+			array1 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+			array2 = array1.filter((element) => {
+				return element !== '' && element !== ' ';
+			});
+
+			array1.sort();
+			array2.sort();
+
+			let sortedString1 = array1.join(' ');
+			let sortedString2 = array2.join(' ');
+			if (sortedString1 == sortedString2) {
 				animeFound = true;
 				characters = a.characters;
 			}

@@ -22,22 +22,23 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN2);
 (async () => {
 	try {
 		console.log(
-			`Started refreshing ${commands.length} application (/) commands.`
+			'\x1b[33m',
+			`Started refreshing ${commands.length} application (/) commands.`,
+			'\x1b[0m'
 		);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{
-				body: commands,
-			}
-		);
+		const data = await rest.put(Routes.applicationCommands(clientId), {
+			body: commands,
+		});
 
 		console.log(
-			`Successfully reloaded ${data.length} application (/) commands.`
+			'\x1b[33m',
+			`Successfully reloaded ${data.length} application (/) commands.`,
+			'\x1b[0m'
 		);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
-		console.error(error);
+		console.error('\x1b[33m', error, '\x1b[0m');
 	}
 })();

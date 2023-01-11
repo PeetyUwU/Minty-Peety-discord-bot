@@ -48,6 +48,7 @@ class UsersManager extends EventEmitter {
 	 * @param {Object} member
 	 * @param {Object} [opts]
 	 * @param {String} opts.tag
+	 * @private
 	 */
 	add(member, opts = {}) {
 		let user = new User(member);
@@ -80,12 +81,49 @@ class UsersManager extends EventEmitter {
 		return user.nyanlings;
 	}
 
-	updateUser(id, user) {}
+	/**
+	 *
+	 * @param {String} userId user id
+	 * @param {Object} userData user data
+	 */
+	updateUser(userId, userData) {}
 
+	/**
+	 *
+	 * @param {String} userId
+	 * @returns {User} user with {@link userId}
+	 */
 	getUser(userId) {
-		return this.users.find((user) => user.id === userId);
+		return new User(this.users.find((user) => user.id === userId));
 	}
 
+	/**
+	 *
+	 * @param {String} userId
+	 * @param {String} mId
+	 */
+	marry(userId, mId) {
+		this.users.find((user) => user.id === userId).marry = mId;
+		this.users.find((user) => user.id === mId).marry = userId;
+		this.updateDatabase();
+	}
+	/**
+	 *
+	 * @param {String} userId
+	 */
+	divorce(userId) {
+		let user = this.users.find((u) => u.id === userId);
+		if (user.marry == '') return false;
+		let user2 = this.users.find((u) => u.id === user.marry);
+		user.marry = '';
+		user2.marry = '';
+		this.updateDatabase();
+		return user2.id;
+	}
+
+	/**
+	 * @private
+	 */
 	updateDatabase() {
 		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
 	}

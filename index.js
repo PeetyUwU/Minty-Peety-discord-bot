@@ -8,6 +8,7 @@ const {
 	ActivityType,
 	SlashCommandBuilder,
 	Collection,
+	MessageCollector,
 } = require('discord.js');
 const Discord = require('discord.js');
 const NekoClient = require('nekos.life');
@@ -82,24 +83,57 @@ const clientDistube = new distube.DisTube(client, {
 	emitAddSongWhenCreatingQueue: false,
 });
 
+const customBot = new Bot('Peety', client);
+
 const PREFIX = 'm!';
 const botAuthor = '676503697252941856';
 const slashCommands = ['test'];
 
+/**
+ * @property {Class} aflbClient
+ * @property {Class} Gifcmd
+ * @property {Class} GuessAnime
+ * @property {Class} distube
+ */
+const opts = {
+	aflbClient,
+	Gifcmd,
+	GuessAnime,
+	distube,
+	Bot,
+	userManager,
+	ms,
+	config,
+	gifs,
+	Client,
+	GatewayIntentBits,
+	Permissions,
+	Partials,
+	EmbedBuilder,
+	ActivityType,
+	SlashCommandBuilder,
+	Collection,
+	MessageCollector,
+	customBot,
+	clientDistube,
+};
+
+module.exports = { opts };
+
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const command = client.interactions.get(interaction.commandName);
-
-	if (!command) {
-		console.error(
-			`No command matching ${interaction.commandName} was found.`
-		);
-		return;
-	}
-
 	try {
-		await command.execute(interaction);
+		if (!interaction.isChatInputCommand()) return;
+
+		const command = client.interactions.get(interaction.commandName);
+
+		if (!command) {
+			console.error(
+				`No command matching ${interaction.commandName} was found.`
+			);
+			return;
+		}
+
+		await command.execute(interaction, opts);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({
@@ -171,8 +205,6 @@ client.on('guildMemberAdd', (member) => {
 	});
 });
 
-const customBot = new Bot('Peety', client);
-
 client.commands = new Collection();
 
 const commandsPath = './commands/classic';
@@ -186,6 +218,11 @@ for (const file of commandFiles) {
 	// Set a new item in the Collection with the key as the command name and the value as the exported module
 	if ('name' in command && 'run' in command) {
 		client.commands.set(command.name, command);
+		if ('alias' in command) {
+			command.alias.forEach((ali) => {
+				client.commands.set(ali, command);
+			});
+		}
 	} else {
 		console.log(
 			`[WARNING] The command at ${filePath} is missing a required "name" or "run" property.`
@@ -215,6 +252,7 @@ for (const file of commandFiles2) {
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return;
+	if (!message.content.startsWith(PREFIX)) return;
 
 	const args = message.content.slice(PREFIX.length).split(/ +/);
 	// const command = args.shift().toLowerCase();
@@ -222,35 +260,19 @@ client.on('messageCreate', async (message) => {
 	const author = message.author;
 	const guild = message.guild;
 
-	const command = client.commands.get(args.shift().toLowerCase());
-
-	if (!command) {
-		console.error(
-			`No command matching ${args.shift().toLowerCase()} was found.`
-		);
-		return;
-	}
-
 	try {
-		await command.run(client, message, author, guild, channel, args, {
-			aflbClient,
-			Gifcmd,
-			GuessAnime,
-			distube,
-			Bot,
-			userManager,
-			ms,
-			config,
-			gifs,
-			Client,
-			GatewayIntentBits,
-			Permissions,
-			Partials,
-			EmbedBuilder,
-			ActivityType,
-			SlashCommandBuilder,
-			Collection,
-		});
+		const command = client.commands.get(args.shift().toLowerCase());
+
+		if (!command) {
+			console.error(
+				`No command matching ${
+					args.length > 0 ? args.shift().toLowerCase() : "Can't find"
+				} was found.`
+			);
+			return;
+		}
+
+		await command.run(client, message, author, guild, channel, args, opts);
 	} catch (error) {
 		console.error(error);
 		await message.reply({
@@ -258,1059 +280,38 @@ client.on('messageCreate', async (message) => {
 			ephemeral: true,
 		});
 	}
-
-	if (!message.content.startsWith(PREFIX)) return;
-	//! actions commands
-	else if (command.name == 'poke') {
-		poke(message, author, guild, channel, args);
-	} else if (command.name == 'pat') {
-		pat(message, author, guild, channel, args);
-	} else if (command.name == 'feed') {
-		feed(message, author, guild, channel, args);
-	} else if (command.name == 'tickle') {
-		tickle(message, author, guild, channel, args);
-	} else if (command.name == 'baka') {
-		baka(message, author, guild, channel, args);
-	} else if (command.name == 'blush') {
-		blushAction(message, author, guild, channel, args);
-	} else if (command.name == 'hentai') {
-	} else if (command.name == 'akick') {
-		akick(message, author, guild, channel, args);
-	} else if (command.name == 'hentai') {
-		hentai(message, author, guild, channel, args);
-	} else if (command.name == 'tease') {
-		tease(message, author, guild, channel, args);
-	}
-	//? else if (command == 'sex') {
-	// 	sex(message, author, guild, channel, args);
-	// }
-
-	//!help command
-	else if (command.name == 'help') {
-		help(message, author, guild, channel, args);
-	}
-
-	//! economy commands
-	else if (command.name == 'nyanlings' || command.name == 'cash') {
-		nyanlings(message, author, guild, channel, args);
-	}
-
-	//! games commands
-	else if (command.name == 'games') {
-		games();
-	} else if (command.name == 'guessanime') {
-		guessAnime(message, author, guild, channel, args);
-	}
-
-	//!moderation commands
-	else if (command.name == 'clear') {
-		clearMsg(message, author, guild, channel, args);
-	} else if (command.name == 'kick') {
-		kick(message, author, guild, channel, args);
-	} else if (command.name == 'ban') {
-		ban(message, author, guild, channel, args);
-	} else if (command.name == 'mute') {
-		mute(message, author, guild, channel, args);
-	}
-
-	//!moderation bot commands
-	else if (command.name == 'addgif') {
-		if (!customBot.getManager(author.id)) return console.log(author); //channel.send("You can't do that");
-		if (!args) return channel.send('No args');
-		let type = args[0];
-		let gifURL = args.slice(1);
-		if (!type || !gifURL) return channel.send('Missing arg');
-
-		try {
-			Gifcmd.addGif({ type, gifURL });
-		} catch (err) {
-			return channel.send(`There was an error: ${err}`);
-		}
-
-		let Embed = new EmbedBuilder();
-		Embed.setTitle(`Adding ${type} gif`)
-			.setDescription(`${gifURL.join(', ')}`)
-			.setImage(gifURL[0])
-			.setColor(0xff0000);
-		return channel.send({ embeds: [Embed] });
-	} else if (command.name == 'invitelink') {
-		return channel.send(inviteLink);
-	} else if (command.name == 'addmanager') {
-		if (customBot.getManager(author.id)) {
-			let mention = message.mentions.users.first();
-			if (!mention) return channel.send('Please mention someone');
-
-			try {
-				customBot.addManager(mention.id);
-			} catch (err) {
-				return channel.send(err);
-			}
-
-			return channel.send(`Added ${mention.tag} as bot manager`);
-		} else {
-			return channel.send("You can't do that");
-		}
-	}
-
-	//?
-	else if (command.name == 'addanime') {
-		if (!customBot.getManager(author.id))
-			return channel.send("You are't allowed to do that");
-		const filter = (msg) => {
-			return msg.author.id == author.id;
-		};
-
-		const EndFilter = (msg) => {
-			return (
-				(msg.author.id == author.id && msg.content == 'yes') ||
-				(msg.author.id == author.id && msg.content == 'no')
-			);
-		};
-
-		const URLFilter = (msg) => {
-			try {
-				new URL(msg.content);
-			} catch {
-				return false;
-			}
-			return msg.author.id == author.id;
-		};
-
-		let name;
-		let picture;
-		let characters = [];
-		let characterName;
-		let characterPicture;
-
-		let collector = new Discord.MessageCollector(channel, {
-			filter: filter,
-			time: 60000,
-			max: 1,
-		});
-		let msg;
-		channel
-			.send(`**Enter anime name**`)
-			.then((sentMessage) => (msg = sentMessage));
-
-		collector.on('collect', (collected) => {
-			name = collected.content;
-			msg.delete();
-			collected.delete();
-		});
-
-		collector.on('end', (collected) => {
-			if (collected.size == 0) return;
-			let collector = new Discord.MessageCollector(channel, {
-				filter: URLFilter,
-				time: 60000,
-				max: 1,
-			});
-			let msg;
-			channel
-				.send(`Name set to **${name}**\n**Enter anime picture url**`)
-				.then((sentMessage) => (msg = sentMessage));
-
-			collector.on('collect', (collected) => {
-				picture = collected.content;
-				msg.delete();
-				collected.delete();
-			});
-			collector.on('end', (collected) => {
-				if (collected.size == 0) return;
-
-				function characterAnimeAdd() {
-					let stop = false;
-					let collector = new Discord.MessageCollector(channel, {
-						filter: filter,
-						time: 60000,
-						max: 1,
-					});
-
-					let Embed = new EmbedBuilder({
-						color: 0xff0000,
-						title: `Anime name: ${name}`,
-						timestamp: new Date(),
-					});
-
-					characters.forEach((ch) => {
-						Embed.addFields({
-							name: ch.name,
-							value: ch.picture,
-						});
-					});
-
-					Embed.setImage(picture);
-					let msg;
-					channel
-						.send({ embeds: [Embed] })
-						.then((sentMessage) => (msg = sentMessage));
-					let msg2;
-					channel
-						.send(`**Enter character name or type *0* to exit**`)
-						.then((sentMessage) => (msg2 = sentMessage));
-
-					collector.on('collect', (collected) => {
-						msg.delete();
-						msg2.delete();
-						collected.delete();
-						if (collected.content == 0) return (stop = true);
-						characterName = collected.content;
-					});
-
-					collector.on('end', (collected) => {
-						if (collected.size == 0) {
-							return channel.send('Timed out!!');
-						}
-						if (stop == true) {
-							let collector = new Discord.MessageCollector(
-								channel,
-								{
-									filter: EndFilter,
-									max: 1,
-									time: 60000,
-								}
-							);
-
-							let Embed = new EmbedBuilder({
-								color: 0xff0000,
-								title: name,
-								timestamp: new Date(),
-							});
-							characters.forEach((ch) => {
-								Embed.addFields({
-									name: ch.name,
-									value: ch.picture,
-								});
-							});
-
-							Embed.setImage(picture);
-							let msg;
-							channel
-								.send({ embeds: [Embed] })
-								.then((sentMessage) => (msg = sentMessage));
-							let msg2;
-							channel
-								.send(
-									`**Are you sure you want to add ${name} with ${characters.length} characters? (yes - no)**`
-								)
-								.then((sentMessage) => (msg2 = sentMessage));
-
-							collector.on('collect', (collected) => {
-								collected.delete();
-								if (collected.content == 'yes') {
-									try {
-										GuessAnime.addAnime({
-											name,
-											characters,
-											picture,
-										});
-									} catch (err) {
-										return channel.send(
-											`There was an error: ${err}`
-										);
-									}
-
-									let Embed = new EmbedBuilder({
-										color: 0xff0000,
-										title: `Adding anime withn name: ${name}`,
-										timestamp: new Date(),
-									});
-									characters.forEach((ch) => {
-										Embed.addFields({
-											name: ch.name,
-											value: ch.picture,
-										});
-									});
-
-									Embed.setImage(picture);
-
-									return channel.send({ embeds: [Embed] });
-								} else if (collected.content == 'no') {
-									return channel.send('Canceled!!');
-								} else {
-									return channel.send('Timed out!!');
-								}
-							});
-
-							collector.on('end', (collected) => {
-								msg.delete();
-								msg2.delete();
-								if (collected.size == 0)
-									return channel.send('Timed out!!');
-							});
-						} else {
-							let collector = new Discord.MessageCollector(
-								channel,
-								{
-									filter: URLFilter,
-									time: 60000,
-									max: 1,
-								}
-							);
-							let msg;
-							channel
-								.send(
-									`Character name is **${characterName}**\n**Enter character picture url**`
-								)
-								.then((sentMessage) => {
-									msg = sentMessage;
-								});
-
-							collector.on('collect', (collected) => {
-								msg.delete();
-								collected.delete();
-								characterPicture = collected.content;
-							});
-
-							collector.on('end', (collected) => {
-								if (collected.size == 0) return;
-
-								characters.push({
-									name: characterName,
-									picture: characterPicture,
-								});
-
-								return characterAnimeAdd();
-							});
-						}
-					});
-				}
-				characterAnimeAdd();
-			});
-		});
-	}
-	//?
-	else if (command.name == 'addcharacter') {
-		if (!customBot.getManager(author.id))
-			return channel.send("You are't allowed to do that");
-		const filter = (message, user) => {
-			return message.author.id == author.id;
-		};
-
-		const URLFilter = (message, user) => {
-			try {
-				new URL(message.content);
-			} catch {
-				return false;
-			}
-			return message.author.id == author.id;
-		};
-
-		let name;
-		let characters = [];
-		let characterName;
-		let characterPicture;
-
-		let collector = new Discord.MessageCollector(channel, {
-			filter: filter,
-			time: 60000,
-			max: 1,
-		});
-		let msg1;
-		channel.send(`**Enter anime name**`).then((sentMessage) => {
-			msg1 = sentMessage;
-		});
-
-		collector.on('collect', (collected) => {
-			msg1.delete();
-			collected.delete();
-			name = collected.content;
-		});
-
-		collector.on('end', (collected) => {
-			if (collected.size == 0) return;
-
-			function characterAnimeAdd() {
-				let stop = false;
-				let collector = new Discord.MessageCollector(channel, {
-					filter: filter,
-					time: 60000,
-					max: 1,
-				});
-
-				let Embed = new EmbedBuilder({
-					color: 0xff0000,
-					title: `Anime name: ${name}`,
-					timestamp: new Date(),
-				});
-
-				characters.forEach((ch) => {
-					Embed.addFields({
-						name: ch.name,
-						value: ch.picture,
-					});
-				});
-
-				if (characters.length > 0)
-					Embed.setImage(characters[0].picture);
-
-				let msg1;
-				channel.send({ embeds: [Embed] }).then((sentMessage) => {
-					msg1 = sentMessage;
-				});
-
-				let msg2;
-				channel
-					.send(`**Enter character name or type *0* to exit**`)
-					.then((sentMessage) => {
-						msg2 = sentMessage;
-					});
-
-				collector.on('collect', (collected) => {
-					msg1.delete();
-					msg2.delete();
-					collected.delete();
-					if (collected.content == 0) return (stop = true);
-
-					characterName = collected.content;
-				});
-
-				collector.on('end', (collected) => {
-					if (collected.size == 0) {
-						stop = true;
-					}
-					if (stop == true) {
-						if (characters.length == 0)
-							return channel.send('Canceled!');
-						try {
-							GuessAnime.addCharacter({
-								name,
-								characters,
-							});
-						} catch (err) {
-							return channel.send(`There was an error: ${err}`);
-						}
-
-						let Embed = new EmbedBuilder({
-							color: 0xff0000,
-							title: `Anime name: ${name}`,
-							timestamp: new Date(),
-						});
-
-						characters.forEach((ch) => {
-							Embed.addFields({
-								name: ch.name,
-								value: ch.picture,
-							});
-						});
-
-						Embed.setImage(characters[0].picture);
-
-						let msg1;
-						channel
-							.send({ embeds: [Embed] })
-							.then((sentMessage) => {
-								msg1 = sentMessage;
-							});
-
-						let msg2;
-						channel
-							.send(
-								`**Are you sure you want to add ${characters.length} characters to ${name}? (yes - no)**`
-							)
-							.then((sentMessage) => (msg2 = sentMessage));
-
-						let collector = new Discord.MessageCollector(channel, {
-							filter: filter,
-							time: 60000,
-							max: 1,
-						});
-
-						collector.on('collect', (collected) => {
-							msg1.delete();
-							msg2.delete();
-							collected.delete();
-							if (collected.content == 'yes') {
-								try {
-									GuessAnime.addCharacter({
-										name,
-										characters,
-									});
-								} catch (err) {
-									return channel.send(
-										`There was an error: ${err}`
-									);
-								}
-
-								let Embed = new EmbedBuilder({
-									color: 0xff0000,
-									title: `Adding ${characters.length} characters to ${name}`,
-									timestamp: new Date(),
-								});
-
-								characters.forEach((ch) => {
-									Embed.addFields({
-										name: ch.name,
-										value: ch.picture,
-									});
-								});
-
-								Embed.setImage(characters[0].picture);
-
-								return channel.send({ embeds: [Embed] });
-							} else if (collected.content == 'no') {
-								return channel.send('Canceled!!');
-							} else {
-								return channel.send('Timed out!!');
-							}
-						});
-
-						collector.on('end', (collected) => {
-							if (collected.size == 0)
-								return channel.send('Timed out!!');
-						});
-					} else {
-						let collector = new Discord.MessageCollector(channel, {
-							filter: URLFilter,
-							time: 60000,
-							max: 1,
-						});
-						let msg1;
-						channel
-							.send(`**Enter character picture url**`)
-							.then((sentMessage) => {
-								msg1 = sentMessage;
-							});
-
-						collector.on('collect', (collected) => {
-							msg1.delete();
-							collected.delete();
-							characterPicture = collected.content;
-						});
-
-						collector.on('end', (collected) => {
-							if (collected.size == 0) return;
-
-							characters.push({
-								name: characterName,
-								picture: characterPicture,
-							});
-
-							return characterAnimeAdd();
-						});
-					}
-				});
-			}
-			characterAnimeAdd();
-		});
-	} else if (command.name == 'getanimelist') {
-		if (!customBot.getManager(author.id))
-			return channel.send("You are't allowed to do that");
-		return channel.send(GuessAnime.getAnimeList());
-	} else if (command.name == 'getcharacters') {
-		if (!customBot.getManager(author.id))
-			return channel.send("You are't allowed to do that");
-		if (args.length == 0) return channel.send('Please specify anime');
-		let anime = args.join(' ');
-
-		let characters;
-		try {
-			characters = GuessAnime.getAnimeCharacters(anime);
-		} catch (err) {
-			channel.send(`There was an error: ${err}`);
-		}
-
-		channel.send(`Characters from ${anime}: ${characters}`);
-	} else if (command.name == 'editanime') {
-		if (!customBot.getManager(author.id))
-			return channel.send("You are't allowed to do that");
-
-		const filter = (message, user) => {
-			return message.author.id == author.id;
-		};
-
-		const filterAnimeName = (message, user) => {
-			if (
-				message.author.id == author.id &&
-				GuessAnime.getAnime(message.content)
-			) {
-				anime = GuessAnime.getAnime(message.content);
-				return true;
-			} else return false;
-		};
-		const EndFilter = (msg) => {
-			return (
-				(msg.author.id == author.id && msg.content == 'yes') ||
-				(msg.author.id == author.id && msg.content == 'no')
-			);
-		};
-
-		const URLFilter = (message, user) => {
-			try {
-				new URL(message.content);
-			} catch {
-				return false;
-			}
-			return message.author.id == author.id;
-		};
-
-		let charChange = 0;
-
-		let collector = new Discord.MessageCollector(channel, {
-			filter: filterAnimeName,
-			time: 60000,
-			max: 1,
-		});
-		let msg;
-		channel
-			.send(`**Enter name of the anime you want to change**`)
-			.then((sentMessage) => (msg = sentMessage));
-
-		let changeName;
-		let anime;
-		collector.on('collect', (collected) => {
-			collected.delete();
-			msg.delete();
-			console.log(collected.content);
-			changeName = collected.content;
-		});
-
-		collector.on('end', (collected) => {
-			let collector = new Discord.MessageCollector(channel, {
-				filter: filter,
-				time: 60000,
-				max: 1,
-			});
-			let Embed = new EmbedBuilder({
-				color: 0xff0000,
-				title: `Anime name: ${anime.name}`,
-				timestamp: new Date(),
-			});
-
-			anime.characters.forEach((ch) => {
-				Embed.addFields({
-					name: ch.name,
-					value: ch.picture,
-				});
-			});
-
-			Embed.setImage(anime.picture);
-
-			let msg;
-			channel
-				.send({ embeds: [Embed] })
-				.then((sentMessage) => (msg = sentMessage));
-			let msg2;
-			channel
-				.send(
-					`**Enter new anime name, 0 to leave it as it is or "exit"**`
-				)
-				.then((sentMessage) => (msg2 = sentMessage));
-
-			let stop = false;
-			collector.on('collect', (collected) => {
-				msg.delete();
-				msg2.delete();
-				collected.delete();
-				if (collected.content == 'exit') {
-					stop = true;
-					return channel.send('Canceling!!');
-				}
-				if (collected.content != 0) {
-					anime.name = collected.content;
-				}
-			});
-
-			collector.on('end', (collected) => {
-				if (stop == true) return;
-				if (collected.size == 0) return channel.send('Timed out');
-
-				let collector = new Discord.MessageCollector(channel, {
-					filter: filter,
-					time: 60000,
-					max: 1,
-				});
-
-				let Embed = new EmbedBuilder({
-					color: 0xff0000,
-					title: `Anime name: ${anime.name}`,
-					timestamp: new Date(),
-				});
-
-				anime.characters.forEach((ch) => {
-					Embed.addFields({
-						name: ch.name,
-						value: ch.picture,
-					});
-				});
-
-				Embed.setImage(anime.picture);
-
-				let msg;
-				channel
-					.send({ embeds: [Embed] })
-					.then((sentMessage) => (msg = sentMessage));
-
-				let msg2;
-				channel
-					.send(
-						`**Enter new anime picture URL, 0 to leave it as it is or "exit"**`
-					)
-					.then((sentMessage) => (msg2 = sentMessage));
-
-				let stop2 = false;
-				collector.on('collect', (collected) => {
-					msg.delete();
-					msg2.delete();
-					collected.delete();
-					if (collected.content == 'exit') {
-						stop2 = true;
-						return channel.send('Canceling!!');
-					}
-					if (collected.content != 0) {
-						try {
-							new URL(collected.content);
-						} catch (err) {
-							return channel.send(`There was an error: ${err}`);
-						}
-						anime.picture = collected.content;
-					}
-				});
-
-				collector.on('end', (collected) => {
-					if (stop2 == true) return;
-					if (collected.size == 0) return channel.send('Timed out');
-
-					function changeCharacter() {
-						let collector = new Discord.MessageCollector(channel, {
-							filter: filter,
-							time: 60000,
-							max: 1,
-						});
-						let characters = [];
-						anime.characters.forEach((ch) => {
-							characters.push(ch.name);
-						});
-
-						let Embed = new EmbedBuilder({
-							color: 0xff0000,
-							title: `Anime name: ${anime.name}`,
-							timestamp: new Date(),
-						});
-
-						anime.characters.forEach((ch) => {
-							Embed.addFields({
-								name: ch.name,
-								value: ch.picture,
-							});
-						});
-
-						Embed.setImage(anime.picture);
-
-						let msg;
-						channel
-							.send({ embeds: [Embed] })
-							.then((sentMessage) => (msg = sentMessage));
-
-						let msg2;
-						channel
-							.send(
-								`**What character do you want to edit? 0 to exit\n \`${characters.join(
-									', '
-								)}\`**`
-							)
-							.then((sentMessage) => (msg2 = sentMessage));
-
-						let stop3 = false;
-						let exit = false;
-						let character;
-						collector.on('collect', (collected) => {
-							msg.delete();
-							msg2.delete();
-							collected.delete();
-							if (collected.content == 0) {
-								stop3 = true;
-								return;
-							}
-
-							let charFound = false;
-							anime.characters.forEach((ch) => {
-								let array1 = ch.name
-									.trim()
-									.toLowerCase()
-									.split(' ');
-								let array2 = collected.content
-									.trim()
-									.toLowerCase()
-									.split(' ');
-
-								array1 = array1.filter((element) => {
-									return element !== '' && element !== ' ';
-								});
-								array2 = array2.filter((element) => {
-									return element !== '' && element !== ' ';
-								});
-
-								array1.sort();
-								array2.sort();
-
-								let sortedString1 = array1.join(' ');
-								let sortedString2 = array2.join(' ');
-
-								if (sortedString1 == sortedString2) {
-									charFound = true;
-									character = ch;
-									return;
-								}
-							});
-
-							if (charFound == false) {
-								let msg;
-								channel
-									.send(
-										"Didn't find character with that name"
-									)
-									.then((sentMessage) => (msg = sentMessage));
-								setTimeout(() => {
-									msg.delete();
-								}, 5000);
-								exit = true;
-								return changeCharacter();
-							}
-						});
-
-						collector.on('end', (collected) => {
-							if (exit == true) return;
-							else if (stop3 == true) {
-								let collector = new Discord.MessageCollector(
-									channel,
-									{
-										filter: EndFilter,
-										max: 1,
-										time: 60000,
-									}
-								);
-
-								let Embed = new EmbedBuilder({
-									color: 0xff0000,
-									title: anime.name,
-									timestamp: new Date(),
-								});
-								anime.characters.forEach((ch) => {
-									Embed.addFields({
-										name: ch.name,
-										value: ch.picture,
-									});
-								});
-
-								Embed.setImage(anime.picture);
-								let msg;
-								channel
-									.send({ embeds: [Embed] })
-									.then((sentMessage) => (msg = sentMessage));
-								let msg2;
-								//TODO
-								channel
-									.send(
-										`**Are you sure you want to edit ${anime.name} with ${anime.characters.length} characters? (yes - no)**`
-									)
-									.then(
-										(sentMessage) => (msg2 = sentMessage)
-									);
-
-								collector.on('collect', (collected) => {
-									msg.delete();
-									msg2.delete();
-									collected.delete();
-									if (collected.content == 'yes') {
-										try {
-											GuessAnime.editAnime(
-												anime,
-												changeName
-											);
-										} catch (err) {
-											return channel.send(
-												`There was an error: ${err}`
-											);
-										}
-
-										let Embed = new EmbedBuilder({
-											color: 0xff0000,
-											title: `${anime.name}`,
-											timestamp: new Date(),
-										});
-										anime.characters.forEach((ch) => {
-											Embed.addFields({
-												name: ch.name,
-												value: ch.picture,
-											});
-										});
-
-										Embed.setImage(anime.picture);
-
-										return channel.send({
-											embeds: [Embed],
-										});
-									} else if (collected.content == 'no') {
-										return channel.send('Canceled!!');
-									} else {
-										return channel.send('Timed out!!');
-									}
-								});
-							} else if (collected.size == 0)
-								return channel.send('Timed out');
-							else {
-								charChange++;
-								let collector = new Discord.MessageCollector(
-									channel,
-									{
-										filter: filter,
-										time: 60000,
-										max: 1,
-									}
-								);
-
-								let Embed = new EmbedBuilder({
-									color: 0xff0000,
-									title: `Character name: ${character.name}`,
-									timestamp: new Date(),
-								});
-
-								Embed.setImage(character.picture);
-
-								let msg;
-								channel
-									.send({ embeds: [Embed] })
-									.then((sentMessage) => (msg = sentMessage));
-
-								let msg2;
-								channel
-									.send(
-										`**Enter new character name, 0 to leave it as it is or "exit"**`
-									)
-									.then(
-										(sentMessage) => (msg2 = sentMessage)
-									);
-
-								let stop4 = false;
-								collector.on('collect', (collected) => {
-									msg.delete();
-									msg2.delete();
-									collected.delete();
-									if (collected.content == 'exit') {
-										stop4 = true;
-										return channel.send('Canceling!!');
-									}
-									if (collected.content != 0) {
-										anime.characters.forEach((ch) => {
-											if (ch.name == character.name)
-												ch.name = collected.content;
-										});
-									}
-								});
-
-								collector.on('end', (collected) => {
-									if (stop4 == true) return;
-									if (collected.size == 0)
-										return channel.send('Timed out');
-
-									let collector =
-										new Discord.MessageCollector(channel, {
-											filter: filter,
-											time: 60000,
-											max: 1,
-										});
-									let Embed = new EmbedBuilder({
-										color: 0xff0000,
-										title: `Character name: ${character.name}`,
-										timestamp: new Date(),
-									});
-
-									Embed.setImage(character.picture);
-
-									let msg;
-									channel
-										.send({ embeds: [Embed] })
-										.then(
-											(sentMessage) => (msg = sentMessage)
-										);
-
-									let msg2;
-									channel
-										.send(
-											`**Enter new character picture URL, 0 to leave it as it is or "exit"**`
-										)
-										.then(
-											(sentMessage) =>
-												(msg2 = sentMessage)
-										);
-
-									let stop5;
-									collector.on('collect', (collected) => {
-										msg.delete();
-										msg2.delete();
-										collected.delete();
-										if (collected.content == 'exit') {
-											stop5 = true;
-											return channel.send('Canceling!!');
-										}
-										if (collected.content != 0) {
-											try {
-												new URL(collected.content);
-											} catch (err) {
-												return channel.send(
-													`There was an error: ${err}`
-												);
-											}
-
-											anime.characters.forEach((ch) => {
-												if (ch.name == character.name)
-													ch.picture =
-														collected.content;
-											});
-										}
-									});
-
-									collector.on('end', (collected) => {
-										if (stop5 == true) return;
-										if (collected.size == 0)
-											return channel.send('Timed out');
-
-										return changeCharacter();
-									});
-								});
-							}
-						});
-					}
-					changeCharacter();
-				});
-			});
-		});
-	}
-	//?
-	else if (command.name == 'creategif') {
-		if (
-			!customBot.getManager(author.id) &&
-			author.id != '824699240701493279'
-		)
-			return console.log(author); //channel.send("You can't do that");
-		if (!args) return channel.send('No args');
-		let name = args[0];
-		let gifURL = args.slice(1);
-		if (!name || !gifURL) return channel.send('Missing arg');
-
-		let s = Gifcmd.createGifCategory({ channel, name, gifURL });
-		if (!s) return channel.send('This category already exists');
-		channel.send(`Created ${name}`);
-	}
-
-	//!others
-	else if (command.name == 'marry') {
-		marry(message, author, guild, channel, args);
-	} else if (command.name == 'divorce') {
-		divorce(message, author, guild, channel, args);
-	} else if (command.name == 'rdnumber') {
-		rdnumber(message, author, guild, channel, args);
-	} else if (command.name == 'play') {
-		play(message, author, guild, channel, args);
-	} else if (command.name == 'queue') {
-		queue(message, author, guild, channel, args);
-	} else if (command.name == 'skip') {
-		skip(message, author, guild, channel, args);
-	} else if (command.name == 'stop') {
-		stop(message, author, guild, channel, args);
-	}
 });
+
+//! actions commands
+// if (command.name == 'hentai') {
+// 	hentai(message, author, guild, channel, args);
+// }
+// //? else if (command == 'sex') {
+// // 	sex(message, author, guild, channel, args);
+// // }
+
+// //!help command
+
+// //! economy commands
+
+// //! games commands
+
+// //!moderation commands
+// else if (command.name == 'kick') {
+// 	kick(message, author, guild, channel, args);
+// } else if (command.name == 'ban') {
+// 	ban(message, author, guild, channel, args);
+// } else if (command.name == 'mute') {
+// 	mute(message, author, guild, channel, args);
+// }
+
+//!moderation bot commands
+
+//?
+//?
+//?
+
+//!others
 
 // client.on('guildMemberAdd', (member) => {
 // 	getCanvas(member);
@@ -1401,7 +402,8 @@ async function getCanvas(member) {
 			(channel) =>
 				(channel.name === 'Welcome' && channel.type == 0) ||
 				(channel.name === 'welcome' && channel.type == 0) ||
-				(channel.id == '927651408159850516' && channel.type == 0)
+				(channel.id == '927651408159850516' && channel.type == 0) ||
+				(channel.id == '891028805509066854' && channel.type == 0)
 		);
 		if (welcomeChannel) {
 			welcomeChannel.send({
@@ -1525,190 +527,7 @@ function ban(message, author, guild, channel, args) {
 	channel.send({ embeds: [Embed] });
 }
 
-/**
- * clears chat
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-function clearMsg(message, author, guild, channel, args) {
-	if (args.length <= 0) return channel.send('Example: m!clear 100');
-	if (isNaN(args[0])) return channel.send('Please enter a number');
-	if (parseInt(args[0]) <= 0 || parseInt(args[0]) > 100)
-		return channel.send('Please enter number between 0 and 100');
-	if (!message.member.permissions.has('MANAGE_MESSAGES'))
-		return channel.send("U can't do that");
-	channel.bulkDelete(Math.floor(args[0]));
-}
-
 //! actions
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function poke(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.poke();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} pokes ${args.join(' ')}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function blushAction(message, author, guild, channel, args) {
-	let gif = gifs.blush[Math.floor(Math.random() * gifs.blush.length)];
-	let Embed = new EmbedBuilder({
-		color: 0xff0000,
-		description: `${author} blushes`,
-		timestamp: new Date(),
-	});
-	Embed.setImage(gif);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function feed(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.feed();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} feeds ${args.join(' ')}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function baka(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.baka();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${args.join(' ')} is baka`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function tickle(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.tickle();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} tickles ${args.join(' ')}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function pat(message, author, guild, channel, args) {
-	let mention = message.mentions.users.first();
-	let descMsg =
-		args.length == 0
-			? 'is giving headpat to someone'
-			: mention.id == author.id
-			? 'wants a headpat'
-			: mention
-			? `is giving headpat to ${mention}`
-			: 'err';
-	if (descMsg == 'wants a headpat')
-		return channel.send(`${author} ${descMsg}`);
-	let gif = await aflbClient.sfw.pat();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function akick(message, author, guild, channel, args) {
-	let mention = message.mentions.users.first();
-	let descMsg =
-		args.length == 0
-			? 'is kicking someone'
-			: mention.id == author.id
-			? `<@${client.user.id}> kicks <@${author.id}>`
-			: mention
-			? `kicks ${mention}`
-			: 'err';
-	let gif = gifs.kick[Math.floor(Math.random() * gifs.kick.length)];
-	if (descMsg == `<@${client.user.id}> kicks <@${author.id}>`) {
-		let gif = gifs.kick[Math.floor(Math.random() * gifs.kick.length)];
-		let Embed = new EmbedBuilder();
-		Embed.setDescription(`${descMsg}`)
-			.setImage(gif)
-			.setTimestamp(new Date())
-			.setColor(0xff0000);
-		return channel.send({ embeds: [Embed] });
-	}
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	return channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function tease(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.tease();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} teases ${args.join(' ')}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
 
 /**
  *
@@ -1742,303 +561,7 @@ async function hentai(message, author, guild, channel, args) {
 
 //! help commands
 
-function help(message, author, guild, channel, args) {
-	let Embed = new EmbedBuilder({
-		color: 0xff0000,
-		title: 'Peety commands',
-		thumbnail: { url: 'https://i.imgur.com/qRFFT4T.jpg' },
-		fields: [
-			{ name: 'Emotes', value: '`blush`, `cry`, `smile`, `smug`' },
-			{
-				name: '🎭Actions',
-				value: '`kiss`, `hug`, `poke`, `cuddle`, `feed`, `baka`, `tickle`, `pat`, `hi`, `tease`, `akick`',
-			},
-			{ name: '🎵Music', value: '`play`, `queue`, `skip`, `stop`' },
-			// { name: '🎭Actions (NSFW)', value: '||`hentai`||,' },
-			{ name: '⚙️Moderation', value: '`kick`, `ban`, `clear`' },
-			{ name: '🎲Games', value: '`guessanime`,' },
-			{ name: '💰Economy', value: '`nyanlings`, `cash`' },
-			{
-				name: 'Others',
-				value: '`marry`, `divorce`, `rdnumber`, `help`',
-			},
-		],
-	});
-	channel.send({ embeds: [Embed] });
-}
-
 //! others
-
-async function marry(message, author, guild, channel, args) {
-	let marry =
-		JSON.parse(fs.readFileSync('./database/marry.json')).length <= 0
-			? []
-			: JSON.parse(fs.readFileSync('./database/marry.json'));
-	let mention = message.mentions.users.first();
-	if (!mention) {
-		return channel.send('Please mention someone!');
-	}
-	if (mention.id == author.id) {
-		return channel.send("You can't marry yourself");
-	}
-	for (let m of marry) {
-		if (m.accept == mention.id) {
-			return channel.send(`${mention} is already married to <@${m.ask}>`);
-		} else if (m.ask == mention.id) {
-			return channel.send(
-				`${mention} is already married to <@${m.accept}>`
-			);
-		} else if (m.ask == author.id) {
-			return channel.send(`You're aleady married to <@${m.accept}>`);
-		} else if (m.accept == author.id) {
-			return channel.send(`You're aleady married to <@${m.ask}>`);
-		}
-	}
-	let reactionMessage = await channel.send(
-		`${mention}, will you marry ${author}?`
-	);
-	const check = '✅';
-	const cross = '❌';
-	await reactionMessage.react(check);
-	await reactionMessage.react(cross);
-	const filter = (reaction, user) =>
-		(!user.bot && user.id == mention.id && reaction.emoji.name === check) ||
-		(!user.bot && user.id == mention.id && reaction.emoji.name === cross);
-
-	const collector = reactionMessage.createReactionCollector({
-		filter,
-		time: 15000,
-		max: 1,
-		errors: ['time'],
-	});
-	collector.on('collect', (reaction, user) => {
-		if (reaction.emoji.name == check) {
-			channel.send(`${mention} is now married to ${author}`);
-			let newMarry = {
-				ask: author.id,
-				accept: mention.id,
-			};
-			marry = [...marry, newMarry];
-			fs.writeFileSync(
-				'./database/marry.json',
-				JSON.stringify(marry, null, 2)
-			);
-		} else if (reaction.emoji.name == cross) {
-			channel.send(
-				`Sorry but ${mention} doesn't want to marry you, ${author}`
-			);
-		}
-	});
-}
-
-function divorce(message, author, guild, channel, args) {
-	let marry =
-		JSON.parse(fs.readFileSync('./database/marry.json')).length <= 0
-			? []
-			: JSON.parse(fs.readFileSync('./database/marry.json'));
-
-	let marryFiltred = marry.filter(
-		(m) => m.ask != author.id && m.accept != author.id
-	);
-	let marryPair = marry.filter(
-		(m) => m.ask == author.id || m.accept == author.id
-	);
-	if (marryPair.length <= 0) {
-		return channel.send('U are not married');
-	}
-
-	let secondPerson =
-		marryPair[0].ask == author.id ? marryPair[0].accept : marryPair[0].ask;
-	console.log(marryFiltred);
-	console.log(marryPair);
-
-	marry = marryFiltred;
-	fs.writeFileSync('./database/marry.json', JSON.stringify(marry, null, 2));
-	channel.send(`U divorced with <@${secondPerson}>`);
-
-	// for (let m of marry) {
-	// 	if (m.accept == mention.id) {
-	// 		return channel.send(`${mention} divorced with <@${m.ask}>`);
-	// 	} else if (m.ask == mention.id) {
-	// 		return channel.send(
-	// 			`${mention} is already married to <@${m.accept}>`
-	// 		);
-	// 	} else if (m.ask == author.id) {
-	// 		return channel.send(`You're aleady married to <@${m.accept}>`);
-	// 	} else if (m.accept == author.id) {
-	// 		return channel.send(`You're aleady married to <@${m.ask}>`);
-	// 	}
-	// }
-}
-
-function nyanlings(message, author, guild, channel, args) {
-	let nyanlings = userManager.getNyanlings(author.id);
-	return message.reply(`You have ${nyanlings} Nyanlings🪙`);
-}
-function games(message, author, guild, channel, args) {
-	let list = [];
-	userManager.games.forEach((game) => {
-		list.push(`**\`${game}\`**`);
-	});
-
-	list.join(', ');
-	return channel.send(list);
-}
-function test(message, author, guild, channel, args) {}
-
-function rdnumber(message, author, guild, channel, args) {
-	let number = Math.round(Math.random() * 100);
-	channel.send(`Your random number is ${number}`);
-}
-
-function play(message, author, guild, channel, args) {
-	let music = args.join(' ');
-	if (!message.member.voice.channelId) return message.reply('Join vc please');
-
-	clientDistube.play(message.member.voice.channel, music, {
-		textChannel: channel,
-		member: message.member,
-		message,
-	});
-}
-function queue(message, author, guild, channel, args) {
-	const queue = clientDistube.getQueue(message);
-	channel.send(
-		'Current queue:\n' +
-			queue.songs
-				.map(
-					(song, id) =>
-						`**${id + 1}**. [${song.name}](${song.url}) - \`${
-							song.formattedDuration
-						}\``
-				)
-				.join('\n')
-	);
-}
-function skip(message, author, guild, channel, args) {
-	clientDistube.skip(message);
-}
-function stop(message, author, guild, channel, args) {
-	try {
-		clientDistube.stop(message);
-		channel.send('Stopped playing');
-	} catch (err) {
-		return channel.send(err);
-	}
-}
-
-function guessAnime(message, author, guild, channel, args) {
-	let anime = GuessAnime.getRandomAnime();
-
-	if (anime.gameType == 'Guess anime by picture') {
-		const filter = (message, user) => {
-			let array1 = message.content.trim().toLowerCase().split(' ');
-			let array2 = anime.name.trim().toLowerCase().split(' ');
-
-			array1 = array1.filter((element) => {
-				return element !== '' && element !== ' ';
-			});
-
-			array2 = array2.filter((element) => {
-				return element != '' && element != ' ';
-			});
-
-			array1.sort();
-			array2.sort();
-
-			let sortedString1 = array1.join(' ');
-			let sortedString2 = array2.join(' ');
-
-			if (sortedString1 == sortedString2) return true;
-			else return false;
-		};
-
-		let Embed = new EmbedBuilder({
-			color: 0xff0000,
-			title: 'Guess the anime',
-			description: 'You have 20 seconds to guess the anime!',
-			fields: [
-				{ name: 'Anime list: ', value: GuessAnime.getAnimeList() },
-			],
-		});
-		Embed.setImage(anime.picture);
-		channel.send({ embeds: [Embed] });
-
-		let collector = new Discord.MessageCollector(channel, {
-			filter: filter,
-			time: 20000,
-			max: 1,
-		});
-
-		collector.on('collect', (collected) => {
-			let count = userManager.addNyanlings(
-				collected.author.id,
-				'guessAnime'
-			);
-			channel.send(
-				`${collected.author} has won! Adding \`${count}\` nyanlings🪙`
-			);
-		});
-
-		collector.on('end', (collected) => {
-			if (collected.size == 0)
-				return channel.send(`No-one won! The anime was ${anime.name}`);
-		});
-	} else if (anime.gameType == 'Guess character by picture') {
-		const filter = (message, user) => {
-			let array1 = message.content.trim().toLowerCase().split(' ');
-			let array2 = anime.character.name.trim().toLowerCase().split(' ');
-
-			array1 = array1.filter((element) => {
-				return element !== '' && element !== ' ';
-			});
-
-			array2 = array2.filter((element) => {
-				return element != '' && element != ' ';
-			});
-
-			array1.sort();
-			array2.sort();
-
-			let sortedString1 = array1.join(' ');
-			let sortedString2 = array2.join(' ');
-
-			if (sortedString1 == sortedString2) return true;
-			else return false;
-		};
-
-		let Embed = new EmbedBuilder({
-			color: 0xff0000,
-			title: `Guess the character from ${anime.name}`,
-			description: 'You have 20 seconds to guess the anime!',
-			fields: [
-				{
-					name: 'Character list: ',
-					value: GuessAnime.getAnimeCharacters(anime.name),
-				},
-			],
-		});
-		Embed.setImage(anime.character.picture);
-		channel.send({ embeds: [Embed] });
-		let collector = new Discord.MessageCollector(channel, {
-			filter: filter,
-			time: 20000,
-			max: 1,
-		});
-
-		collector.on('collect', (collected) => {
-			userManager.addNyanlings(collected.author.id, 'guessAnime');
-			channel.send(`${collected.author} has won!`);
-		});
-
-		collector.on('end', (collected) => {
-			if (collected.size == 0)
-				return channel.send(
-					`No-one won! The character was ${anime.character.name}`
-				);
-		});
-	}
-}
 
 clientDistube.on('playSong', (queue, song) => {
 	queue.textChannel.send(

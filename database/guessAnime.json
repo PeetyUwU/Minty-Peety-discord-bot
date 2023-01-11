@@ -1,98 +1,136 @@
 [
-	{
-		"name": "Another",
-		"characters": [
-			{
-				"name": "Mei Misaki",
-				"picture": "https://static.wikia.nocookie.net/great-characters/images/4/4d/D6srbg9-57074714-d28e-48ae-86fe-43274e111f0e.png/revision/latest?cb=20191116011149"
-			},
-			{
-				"name": "Kouichi Sakakibara",
-				"picture": "https://static.wikia.nocookie.net/another/images/0/04/Kouichi_pfp.png/revision/latest?cb=20180622211450"
-			},
-			{
-				"name": "Misaki Fujioka",
-				"picture": "https://i.pinimg.com/736x/f6/7f/35/f67f350716fd023ab737d527088e6508.jpg"
-			},
-			{
-				"name": "Izumi Akazawa",
-				"picture": "https://static.wikia.nocookie.net/another/images/b/bb/Izumi_profile.png/revision/latest?cb=20220102182159"
-			},
-			{
-				"name": "Sanae Mizuno",
-				"picture": "https://static.wikia.nocookie.net/another/images/2/20/Sanae_profile.jpg/revision/latest?cb=20210913005856"
-			}
-		],
-		"picture": "https://www.themoviedb.org/t/p/original/oAfc1oNsURepm6VegBSBw1IGMF4.jpg"
-	},
-	{
-		"name": "Love is war",
-		"characters": [
-			{
-				"name": "Shinomiya Kaguya",
-				"picture": "https://cdn.myanimelist.net/images/characters/9/371540.jpg"
-			}
-		],
-		"picture": "https://cdn.myanimelist.net/images/anime/1430/118919.jpg"
-	},
-	{
-		"name": "My dress up darling",
-		"characters": [
-			{
-				"name": "Kitagawa Marin",
-				"picture": "https://cdn.myanimelist.net/r/42x62/images/characters/14/457312.webp?s=8e495f90e0b484756a4e80fd04ab08ad"
-			}
-		],
-		"picture": "https://cdn.myanimelist.net/images/anime/1179/119897.jpg"
-	},
-	{
-		"name": "Mushoku Tensei",
-		"characters": [
-			{
-				"name": "Migurdia Roxy",
-				"picture": "https://cdn.myanimelist.net/images/characters/4/423670.jpg"
-			},
-			{
-				"name": "Greyrat Eris Boreas",
-				"picture": "https://cdn.myanimelist.net/images/characters/14/324594.jpg"
-			},
-			{
-				"name": "Sylphiette",
-				"picture": "https://cdn.myanimelist.net/images/characters/10/423669.jpg"
-			},
-			{
-				"name": "Greyrat Rudeus",
-				"picture": "https://cdn.myanimelist.net/images/characters/2/423667.jpg"
-			}
-		],
-		"picture": "https://cdn.myanimelist.net/images/anime/1530/117776.jpg"
-	},
-	{
-		"name": "Horimiya",
-		"characters": [
-			{
-				"name": "Miyamura Izumi",
-				"picture": "https://external-preview.redd.it/z8BWCBuZb8OUZRejWcVVSkLySaBp2feBY4QPvbFlxnU.jpg?auto=webp&s=fe75da139b15a518dec8bd5c98f08585ed05bbd9"
-			},
-			{
-				"name": "Horimiya Hori",
-				"picture": "https://preview.redd.it/5x6v8phk9ag61.png?width=640&crop=smart&auto=webp&s=38811d41d13f5ce4bc5aecb974410a27968a3a88"
-			}
-		],
-		"picture": "https://cdn.myanimelist.net/images/anime/1695/111486.jpg"
-	},
-	{
-		"name": "Mirai Nikki",
-		"characters": [
-			{
-				"name": "Gasai Yuno",
-				"picture": "https://64.media.tumblr.com/e1424419da6a1c134f68440a2a7c0010/aff0fca55d497c94-c7/s1280x1920/50a1350c32cbc8ab4f1a5dac6cece3510648af42.jpg"
-			},
-			{
-				"name": "Amano Yukiteru",
-				"picture": "https://static.wikia.nocookie.net/futurediary/images/6/61/Yukki.jpg/revision/latest?cb=20200915210222"
-			}
-		],
-		"picture": "https://img.karaoketexty.sk/img/artists/526_artid/52629/mirai-nikki-soundtrack-549688.jpg"
-	}
+  {
+    "name": "Love is war",
+    "characters": [
+      {
+        "name": "Shinomiya Kaguya",
+        "picture": "https://cdn.myanimelist.net/images/characters/9/371540.jpg"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://cdn.myanimelist.net/images/anime/1430/118919.jpg"
+  },
+  {
+    "name": "My dress up darling",
+    "characters": [
+      {
+        "name": "Kitagawa Marin",
+        "picture": "https://cdn.myanimelist.net/r/42x62/images/characters/14/457312.webp?s=8e495f90e0b484756a4e80fd04ab08ad"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://cdn.myanimelist.net/images/anime/1179/119897.jpg"
+  },
+  {
+    "name": "Mushoku Tensei",
+    "characters": [
+      {
+        "name": "Migurdia Roxy",
+        "picture": "https://cdn.myanimelist.net/images/characters/4/423670.jpg"
+      },
+      {
+        "name": "Greyrat Eris Boreas",
+        "picture": "https://cdn.myanimelist.net/images/characters/14/324594.jpg"
+      },
+      {
+        "name": "Sylphiette",
+        "picture": "https://cdn.myanimelist.net/images/characters/10/423669.jpg"
+      },
+      {
+        "name": "Greyrat Rudeus",
+        "picture": "https://cdn.myanimelist.net/images/characters/2/423667.jpg"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://cdn.myanimelist.net/images/anime/1530/117776.jpg"
+  },
+  {
+    "name": "Horimiya",
+    "characters": [
+      {
+        "name": "Miyamura Izumi",
+        "picture": "https://external-preview.redd.it/z8BWCBuZb8OUZRejWcVVSkLySaBp2feBY4QPvbFlxnU.jpg?auto=webp&s=fe75da139b15a518dec8bd5c98f08585ed05bbd9"
+      },
+      {
+        "name": "Horimiya Hori",
+        "picture": "https://preview.redd.it/5x6v8phk9ag61.png?width=640&crop=smart&auto=webp&s=38811d41d13f5ce4bc5aecb974410a27968a3a88"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://cdn.myanimelist.net/images/anime/1695/111486.jpg"
+  },
+  {
+    "name": "Mirai Nikki",
+    "characters": [
+      {
+        "name": "Gasai Yuno",
+        "picture": "https://64.media.tumblr.com/e1424419da6a1c134f68440a2a7c0010/aff0fca55d497c94-c7/s1280x1920/50a1350c32cbc8ab4f1a5dac6cece3510648af42.jpg"
+      },
+      {
+        "name": "Amano Yukiteru",
+        "picture": "https://static.wikia.nocookie.net/futurediary/images/6/61/Yukki.jpg/revision/latest?cb=20200915210222"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Mirainikkicover.jpg/220px-Mirainikkicover.jpg"
+  },
+  {
+    "name": "Another",
+    "characters": [
+      {
+        "name": "Mei Misaki",
+        "picture": "https://static.wikia.nocookie.net/great-characters/images/4/4d/D6srbg9-57074714-d28e-48ae-86fe-43274e111f0e.png/revision/latest?cb=20191116011149"
+      },
+      {
+        "name": "Kouichi Sakakibara",
+        "picture": "https://static.wikia.nocookie.net/another/images/0/04/Kouichi_pfp.png/revision/latest?cb=20180622211450"
+      },
+      {
+        "name": "Fujioka Misaki",
+        "picture": "https://i.pinimg.com/736x/f6/7f/35/f67f350716fd023ab737d527088e6508.jpg"
+      },
+      {
+        "name": "Izumi Akazawa",
+        "picture": "https://static.wikia.nocookie.net/another/images/b/bb/Izumi_profile.png/revision/latest?cb=20220102182159"
+      },
+      {
+        "name": "Sanae Mizuno",
+        "picture": "https://static.wikia.nocookie.net/another/images/2/20/Sanae_profile.jpg/revision/latest?cb=20210913005856"
+      },
+      {
+        "name": "Tomohiko Kazami",
+        "picture": "https://static.wikia.nocookie.net/another/images/3/35/Tomohiko_profile.jpg/revision/latest/scale-to-width-down/300?cb=20210911203801"
+      },
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://www.themoviedb.org/t/p/original/oAfc1oNsURepm6VegBSBw1IGMF4.jpg"
+  },
+  {
+    "name": "Angels of slaughter",
+    "characters": [
+      {
+        "name": "Rachel Gardner",
+        "picture": "https://static.wikia.nocookie.net/satsuriku-no-tenshi/images/3/37/Rachel-Anime.png/revision/latest/scale-to-width-down/235?cb=20200621233035"
+      }
+    ],
+    "picture": "https://www-animeherald-com.exactdn.com/wp-content/uploads/2017/07/Angel-of-Slaughter-Header-001-20170724.jpg?strip=all&lossy=0&ssl=1"
+  }
 ]
