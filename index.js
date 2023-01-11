@@ -6,6 +6,8 @@ const {
 	Partials,
 	EmbedBuilder,
 	ActivityType,
+	SlashCommandBuilder,
+	Collection,
 } = require('discord.js');
 const Discord = require('discord.js');
 const NekoClient = require('nekos.life');
@@ -82,6 +84,30 @@ const clientDistube = new distube.DisTube(client, {
 
 const PREFIX = 'm!';
 const botAuthor = '676503697252941856';
+const slashCommands = ['test'];
+
+client.on('interactionCreate', async (interaction) => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = client.interactions.get(interaction.commandName);
+
+	if (!command) {
+		console.error(
+			`No command matching ${interaction.commandName} was found.`
+		);
+		return;
+	}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({
+			content: 'There was an error while executing this command!',
+			ephemeral: true,
+		});
+	}
+});
 
 client.on('ready', () => {
 	console.log('Bot is ready!   ' + client.user.tag);
@@ -90,6 +116,12 @@ client.on('ready', () => {
 		guild.members.cache.forEach((member) => {
 			userManager.checkUser(member);
 		});
+	});
+
+	slashCommands.forEach((command) => {
+		new SlashCommandBuilder()
+			.setName(command)
+			.setDescription('This command is only for testing');
 	});
 
 	const arrayOfStatus = [
@@ -141,51 +173,112 @@ client.on('guildMemberAdd', (member) => {
 
 const customBot = new Bot('Peety', client);
 
+client.commands = new Collection();
+
+const commandsPath = './commands/classic';
+const commandFiles = fs
+	.readdirSync(commandsPath)
+	.filter((file) => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const filePath = `./commands/classic/${file}`;
+	const command = require(filePath);
+	// Set a new item in the Collection with the key as the command name and the value as the exported module
+	if ('name' in command && 'run' in command) {
+		client.commands.set(command.name, command);
+	} else {
+		console.log(
+			`[WARNING] The command at ${filePath} is missing a required "name" or "run" property.`
+		);
+	}
+}
+
+client.interactions = new Collection();
+
+const commandsPath2 = './commands/interactions';
+const commandFiles2 = fs
+	.readdirSync(commandsPath2)
+	.filter((file) => file.endsWith('.js'));
+
+for (const file of commandFiles2) {
+	const filePath = `./commands/interactions/${file}`;
+	const command = require(filePath);
+	// Set a new item in the Collection with the key as the command name and the value as the exported module
+	if ('data' in command && 'execute' in command) {
+		client.interactions.set(command.data.name, command);
+	} else {
+		console.log(
+			`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
+		);
+	}
+}
+
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return;
 
 	const args = message.content.slice(PREFIX.length).split(/ +/);
-	const command = args.shift().toLowerCase();
+	// const command = args.shift().toLowerCase();
 	const channel = message.channel;
 	const author = message.author;
 	const guild = message.guild;
 
+	const command = client.commands.get(args.shift().toLowerCase());
+
+	if (!command) {
+		console.error(
+			`No command matching ${args.shift().toLowerCase()} was found.`
+		);
+		return;
+	}
+
+	try {
+		await command.run(client, message, author, guild, channel, args, {
+			aflbClient,
+			Gifcmd,
+			GuessAnime,
+			distube,
+			Bot,
+			userManager,
+			ms,
+			config,
+			gifs,
+			Client,
+			GatewayIntentBits,
+			Permissions,
+			Partials,
+			EmbedBuilder,
+			ActivityType,
+			SlashCommandBuilder,
+			Collection,
+		});
+	} catch (error) {
+		console.error(error);
+		await message.reply({
+			content: 'There was an error while executing this command!',
+			ephemeral: true,
+		});
+	}
+
 	if (!message.content.startsWith(PREFIX)) return;
 	//! actions commands
-	else if (command == 'hi') {
-		hi(message, author, guild, channel, args);
-	} else if (command == 'kiss') {
-		kiss(message, author, guild, channel, args);
-	} else if (command == 'hug') {
-		hug(message, author, guild, channel, args);
-	} else if (command == 'cry') {
-		cry(message, author, guild, channel, args);
-	} else if (command == 'smile') {
-		smile(message, author, guild, channel, args);
-	} else if (command == 'smug') {
-		smug(message, author, guild, channel, args);
-	} else if (command == 'slap') {
-		slap(message, author, guild, channel, args);
-	} else if (command == 'cuddle') {
-		cuddle(message, author, guild, channel, args);
-	} else if (command == 'poke') {
+	else if (command.name == 'poke') {
 		poke(message, author, guild, channel, args);
-	} else if (command == 'pat') {
+	} else if (command.name == 'pat') {
 		pat(message, author, guild, channel, args);
-	} else if (command == 'feed') {
+	} else if (command.name == 'feed') {
 		feed(message, author, guild, channel, args);
-	} else if (command == 'tickle') {
+	} else if (command.name == 'tickle') {
 		tickle(message, author, guild, channel, args);
-	} else if (command == 'baka') {
+	} else if (command.name == 'baka') {
 		baka(message, author, guild, channel, args);
-	} else if (command == 'blush') {
+	} else if (command.name == 'blush') {
 		blushAction(message, author, guild, channel, args);
-	} else if (command == 'hentai') {
-	} else if (command == 'akick') {
+	} else if (command.name == 'hentai') {
+	} else if (command.name == 'akick') {
 		akick(message, author, guild, channel, args);
-	} else if (command == 'hentai') {
+	} else if (command.name == 'hentai') {
 		hentai(message, author, guild, channel, args);
-	} else if (command == 'tease') {
+	} else if (command.name == 'tease') {
 		tease(message, author, guild, channel, args);
 	}
 	//? else if (command == 'sex') {
@@ -193,35 +286,35 @@ client.on('messageCreate', async (message) => {
 	// }
 
 	//!help command
-	else if (command == 'help') {
+	else if (command.name == 'help') {
 		help(message, author, guild, channel, args);
 	}
 
 	//! economy commands
-	else if (command == 'nyanlings' || command == 'cash') {
+	else if (command.name == 'nyanlings' || command.name == 'cash') {
 		nyanlings(message, author, guild, channel, args);
 	}
 
 	//! games commands
-	else if (command == 'games') {
+	else if (command.name == 'games') {
 		games();
-	} else if (command == 'guessanime') {
+	} else if (command.name == 'guessanime') {
 		guessAnime(message, author, guild, channel, args);
 	}
 
 	//!moderation commands
-	else if (command == 'clear') {
+	else if (command.name == 'clear') {
 		clearMsg(message, author, guild, channel, args);
-	} else if (command == 'kick') {
+	} else if (command.name == 'kick') {
 		kick(message, author, guild, channel, args);
-	} else if (command == 'ban') {
+	} else if (command.name == 'ban') {
 		ban(message, author, guild, channel, args);
-	} else if (command == 'mute') {
+	} else if (command.name == 'mute') {
 		mute(message, author, guild, channel, args);
 	}
 
 	//!moderation bot commands
-	else if (command == 'addgif') {
+	else if (command.name == 'addgif') {
 		if (!customBot.getManager(author.id)) return console.log(author); //channel.send("You can't do that");
 		if (!args) return channel.send('No args');
 		let type = args[0];
@@ -240,9 +333,9 @@ client.on('messageCreate', async (message) => {
 			.setImage(gifURL[0])
 			.setColor(0xff0000);
 		return channel.send({ embeds: [Embed] });
-	} else if (command == 'invitelink') {
+	} else if (command.name == 'invitelink') {
 		return channel.send(inviteLink);
-	} else if (command == 'addmanager') {
+	} else if (command.name == 'addmanager') {
 		if (customBot.getManager(author.id)) {
 			let mention = message.mentions.users.first();
 			if (!mention) return channel.send('Please mention someone');
@@ -260,7 +353,7 @@ client.on('messageCreate', async (message) => {
 	}
 
 	//?
-	else if (command == 'addanime') {
+	else if (command.name == 'addanime') {
 		if (!customBot.getManager(author.id))
 			return channel.send("You are't allowed to do that");
 		const filter = (msg) => {
@@ -487,7 +580,7 @@ client.on('messageCreate', async (message) => {
 		});
 	}
 	//?
-	else if (command == 'addcharacter') {
+	else if (command.name == 'addcharacter') {
 		if (!customBot.getManager(author.id))
 			return channel.send("You are't allowed to do that");
 		const filter = (message, user) => {
@@ -700,11 +793,11 @@ client.on('messageCreate', async (message) => {
 			}
 			characterAnimeAdd();
 		});
-	} else if (command == 'getanimelist') {
+	} else if (command.name == 'getanimelist') {
 		if (!customBot.getManager(author.id))
 			return channel.send("You are't allowed to do that");
 		return channel.send(GuessAnime.getAnimeList());
-	} else if (command == 'getcharacters') {
+	} else if (command.name == 'getcharacters') {
 		if (!customBot.getManager(author.id))
 			return channel.send("You are't allowed to do that");
 		if (args.length == 0) return channel.send('Please specify anime');
@@ -718,7 +811,7 @@ client.on('messageCreate', async (message) => {
 		}
 
 		channel.send(`Characters from ${anime}: ${characters}`);
-	} else if (command == 'editanime') {
+	} else if (command.name == 'editanime') {
 		if (!customBot.getManager(author.id))
 			return channel.send("You are't allowed to do that");
 
@@ -1185,7 +1278,7 @@ client.on('messageCreate', async (message) => {
 		});
 	}
 	//?
-	else if (command == 'creategif') {
+	else if (command.name == 'creategif') {
 		if (
 			!customBot.getManager(author.id) &&
 			author.id != '824699240701493279'
@@ -1202,19 +1295,19 @@ client.on('messageCreate', async (message) => {
 	}
 
 	//!others
-	else if (command == 'marry') {
+	else if (command.name == 'marry') {
 		marry(message, author, guild, channel, args);
-	} else if (command == 'divorce') {
+	} else if (command.name == 'divorce') {
 		divorce(message, author, guild, channel, args);
-	} else if (command == 'rdnumber') {
+	} else if (command.name == 'rdnumber') {
 		rdnumber(message, author, guild, channel, args);
-	} else if (command == 'play') {
+	} else if (command.name == 'play') {
 		play(message, author, guild, channel, args);
-	} else if (command == 'queue') {
+	} else if (command.name == 'queue') {
 		queue(message, author, guild, channel, args);
-	} else if (command == 'skip') {
+	} else if (command.name == 'skip') {
 		skip(message, author, guild, channel, args);
-	} else if (command == 'stop') {
+	} else if (command.name == 'stop') {
 		stop(message, author, guild, channel, args);
 	}
 });
@@ -1313,7 +1406,7 @@ async function getCanvas(member) {
 		if (welcomeChannel) {
 			welcomeChannel.send({
 				files: [atta],
-				content: `:wave: Hello <@${member.user.id}> welcome to **${member.guild.name}**. We now currently have **${member.guild.memberCount}** members.`,
+				content: `:wave: Hello <@${member.user.id}> welcome to **${member.guild.name}**. We currently have **${member.guild.memberCount}** members.`,
 			});
 		}
 		if (!welcomeChannel) {
@@ -1323,7 +1416,7 @@ async function getCanvas(member) {
 			});
 			welcome.send({
 				files: [atta],
-				content: `:wave: Hello <@${member.user.id}> welcome to **${member.guild.name}**. We now currently have **${member.guild.memberCount}** members.`,
+				content: `:wave: Hello <@${member.user.id}> welcome to **${member.guild.name}**. We currently have **${member.guild.memberCount}** members.`,
 			});
 		}
 	} catch (e) {
@@ -1458,132 +1551,6 @@ function clearMsg(message, author, guild, channel, args) {
  * @param {Object} guild message guild
  * @param {Object} channel message channel
  */
-async function kiss(message, author, guild, channel, args) {
-	let mention = message.mentions.users.first();
-	let descMsg =
-		args.length == 0
-			? 'is kissing someone'
-			: mention.id == author.id
-			? 'wants a kiss'
-			: mention
-			? `is kissing ${mention}`
-			: 'err';
-	if (descMsg == 'wants a kiss') return channel.send(`${author} ${descMsg}`);
-	let gif = await aflbClient.sfw.kiss();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function hug(message, author, guild, channel, args) {
-	let mention = message.mentions.users.first();
-	let descMsg =
-		args.length == 0
-			? 'is hugging someone'
-			: mention.id == author.id
-			? 'wants a hug'
-			: mention
-			? `is hugging ${mention}`
-			: 'err';
-	if (descMsg == 'wants a hug') return channel.send(`${author} ${descMsg}`);
-	let gif = await aflbClient.sfw.hug();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function cry(message, author, guild, channel, args) {
-	let descMsg = 'is crying';
-	let gif = await aflbClient.sfw.cry();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function smile(message, author, guild, channel, args) {
-	let descMsg = 'is smiling';
-	let gif = await aflbClient.sfw.smile();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function smug(message, author, guild, channel, args) {
-	let descMsg = 'has a smug look';
-	let gif = await aflbClient.sfw.smug();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-async function slap(message, author, guild, channel, args) {
-	let mention = message.mentions.users.first();
-	let descMsg =
-		args.length == 0
-			? 'is slapping someone'
-			: mention.id == author.id
-			? 'wants to be slapped'
-			: mention
-			? `is slapping ${mention}`
-			: 'err';
-	if (descMsg == 'wants to be slapped')
-		return channel.send(`${author} ${descMsg}`);
-	let gif = await aflbClient.sfw.slap();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} ${descMsg}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
 async function poke(message, author, guild, channel, args) {
 	let gif = await aflbClient.sfw.poke();
 	let Embed = new EmbedBuilder();
@@ -1609,23 +1576,6 @@ async function blushAction(message, author, guild, channel, args) {
 		timestamp: new Date(),
 	});
 	Embed.setImage(gif);
-	channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function cuddle(message, author, guild, channel, args) {
-	let gif = await aflbClient.sfw.cuddle();
-	let Embed = new EmbedBuilder();
-	Embed.setDescription(`${author} cuddles ${args.join(' ')}`)
-		.setImage(gif)
-		.setTimestamp(new Date())
-		.setColor(0xff0000);
 	channel.send({ embeds: [Embed] });
 }
 
@@ -1741,17 +1691,6 @@ async function akick(message, author, guild, channel, args) {
 		.setTimestamp(new Date())
 		.setColor(0xff0000);
 	return channel.send({ embeds: [Embed] });
-}
-
-/**
- *
- * @param {Object} message message
- * @param {Object} author message author
- * @param {Object} guild message guild
- * @param {Object} channel message channel
- */
-async function hi(message, author, guild, channel, args) {
-	channel.send(`Hello ${message.author}`);
 }
 
 /**
@@ -1945,6 +1884,7 @@ function games(message, author, guild, channel, args) {
 	list.join(', ');
 	return channel.send(list);
 }
+function test(message, author, guild, channel, args) {}
 
 function rdnumber(message, author, guild, channel, args) {
 	let number = Math.round(Math.random() * 100);

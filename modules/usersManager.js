@@ -113,9 +113,7 @@ class UsersManager extends EventEmitter {
 class User {
 	/**
 	 *
-	 * @param {String} id id of a user
-	 * @param {String} guild id of a guild
-	 * @param {Object} [opts]
+	 * @param {Object} member object with user information
 	 */
 	constructor(member) {
 		if (!member) throw 'Missing parameters';

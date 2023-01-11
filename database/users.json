@@ -6321,7 +6321,8 @@
     "id": "729943289012289557",
     "marry": "",
     "guilds": [
-      "891028805509066852"
+      "891028805509066852",
+      "1023138812278353961"
     ],
     "nyanlings": 0,
     "gainBoost": 1,
@@ -12491,6 +12492,126 @@
     "nyanlings": 0,
     "gainBoost": 1,
     "tag": "Emircan#0076",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1061245090271613009",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Yeon 💙#7306",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "920286066831929375",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Steiner Kaslana#0091",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "647485013037940746",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Grizzly#1486",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "588525910471475211",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "pepeKAWI#3519",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1013489305626349620",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Rejdn_#3266",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "505390835173687307",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Zetor_29#9258",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1062695649495240784",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Emangod#8932",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "937775018870472774",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Patino#7777",
     "games": {
       "guessAnime": {
         "winPrice": 10
