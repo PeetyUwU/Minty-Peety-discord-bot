@@ -1,4 +1,7 @@
 const fs = require('fs');
+
+//! Documentation
+
 const {
 	Client,
 	GatewayIntentBits,
@@ -22,7 +25,7 @@ const aflbClient = new aflb();
 
 const Canvas = require('canvas');
 
-const Gif = require('./modules/gif.js');
+const { Gif, GifTypes } = require('./modules/gif.js');
 const Gifcmd = new Gif();
 
 const GuessAnime = require('./modules/guessAnime.js');
@@ -313,10 +316,6 @@ client.on('messageCreate', async (message) => {
 
 //!others
 
-// client.on('guildMemberAdd', (member) => {
-// 	getCanvas(member);
-// });
-
 client.on('guildCreate', (guild) => {
 	let channeltoSend;
 	guild.channels.cache.forEach((channel) => {
@@ -402,8 +401,8 @@ async function getCanvas(member) {
 			(channel) =>
 				(channel.name === 'Welcome' && channel.type == 0) ||
 				(channel.name === 'welcome' && channel.type == 0) ||
-				(channel.id == '927651408159850516' && channel.type == 0) ||
-				(channel.id == '891028805509066854' && channel.type == 0)
+				(channel.id == '927651408159850516' && channel.type == 0)
+			// (channel.id == '891028805509066854' && channel.type == 0)
 		);
 		if (welcomeChannel) {
 			welcomeChannel.send({
@@ -607,3 +606,8 @@ if (config.message_on_start == 1) {
 		console.error(err);
 	}
 }
+
+// setTimeout(() => {
+// 	console.log('Restarting');
+// 	process.exit(1);
+// }, 3600000);

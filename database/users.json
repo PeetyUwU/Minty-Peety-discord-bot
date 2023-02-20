@@ -6742,7 +6742,8 @@
     "id": "766605190228738068",
     "marry": "",
     "guilds": [
-      "891028805509066852"
+      "891028805509066852",
+      "1023138812278353961"
     ],
     "nyanlings": 0,
     "gainBoost": 1,
@@ -8632,7 +8633,8 @@
     "id": "858126189498597396",
     "marry": "",
     "guilds": [
-      "891028805509066852"
+      "891028805509066852",
+      "1023138812278353961"
     ],
     "nyanlings": 0,
     "gainBoost": 1,
@@ -12642,6 +12644,801 @@
     "nyanlings": 0,
     "gainBoost": 1,
     "tag": "william/nacho libre#7535",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "627218379442225172",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "zowyツ#1694",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "922340124510007346",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "dr. lipschitz#2380",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "904439678428655657",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "sim-chan#3267",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1059586514406867126",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Hamilton#2454",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "996295257765445663",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "_stepaan_#7424",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "787323228824666172",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Parag0rius#4267",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "817336850976866324",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "<natynaa3#5974",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "604245973270790146",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Akatsukimaru#1496",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "445218141505847317",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Foxyk4win#9968",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "688719208342880297",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "KONO DIODORANT#7737",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "489835414199205892",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "prubixy#6788",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "597569307961983007",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Zuzanietka#4017",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "639580996777410571",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "向こう見ずな#6464",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "507289469339041792",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "viisitor#7545",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "856426969343328256",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Jace.is.gayer.than.you.🌈🌚#1252",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "980024793711640636",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "gchavanh#6589",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "669550302785175583",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "AlousizeD.#6517",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "768161899992449045",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Honza134#1657",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "918504696300331129",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "?_Megumin_?#3610",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "901219490379989032",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Waffle#2224",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "824920923391262760",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Dieres ⛥#9227",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "638476268257411123",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "DantenCZ#8312",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "918855417898082345",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Davcahraje123#0772",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "521357185326776340",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Gluffy#1252",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "274997886620663820",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Kreyzinka#8638",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "206530856347631616",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "ShonyxD#0060",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "901838635337396295",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "KerayShade#8885",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "416724841132064769",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "TONIK#8066",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "781533086801330218",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Nikko#8122",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1061676363859365898",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "nasratpico#8787",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "918354091040706590",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "??????????#6139",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1001086914889265173",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Neyra_17#7732",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "302744987475509248",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Fugi#2804",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "922808172375322696",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "deepr0ckz#6494",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "923094864147656775",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "LordSnow99#3870",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "765216782855438408",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Thedarver#0038",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "491727884684099604",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Mikynsky#5896",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "717865851033747527",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Maru (✧◉◡◉)#6828",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "707621873495703603",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "kikor33#9626",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "414525803792039947",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Scared Potato#6524",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1050282116841214014",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Yukiiseeeekk#8214",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1049000244765020160",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "enes_pugb1#3240",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "987436615314079804",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "komi_#5229",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "995367102242373702",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Fishyisbůh.cz#6809",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "864384317286383636",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "martex#1623",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "495947679323652117",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "johnqtt#1963",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "964940901417881621",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Mr. Spectre#2322",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "468038966596337664",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Kovi#9867",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "922595310340042764",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Country Blump Kid#7893",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "455463098313342985",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Honzík#2771",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1042474330765918239",
+    "marry": "",
+    "guilds": [
+      "1040747947425546362"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "Sofia007#7129",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "1059107031480533033",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "F.#8754",
+    "games": {
+      "guessAnime": {
+        "winPrice": 10
+      }
+    }
+  },
+  {
+    "id": "753696435660259338",
+    "marry": "",
+    "guilds": [
+      "891028805509066852"
+    ],
+    "nyanlings": 0,
+    "gainBoost": 1,
+    "tag": "アニカ#1470",
     "games": {
       "guessAnime": {
         "winPrice": 10

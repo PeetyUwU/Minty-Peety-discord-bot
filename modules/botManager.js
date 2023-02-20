@@ -97,8 +97,6 @@ class Bot extends EventEmitter {
 				console.log('\x1b[31m', '\x1b[1m', '\x1b[40m', err, '\x1b[0m');
 			}
 		}
-		if (manager.tag) {
-		}
 	}
 
 	/**
@@ -122,7 +120,7 @@ class Bot extends EventEmitter {
 
 	/**
 	 * updates managers from database
-	 * @returns {Object} this
+	 * @returns {this} this
 	 */
 	updateManagerList() {
 		this.managers = JSON.parse(fs.readFileSync(this.filePath));
@@ -131,7 +129,7 @@ class Bot extends EventEmitter {
 	/**
 	 *
 	 * @param {String} manager managers id
-	 * @returns {Object} this
+	 * @returns {this} this
 	 */
 	addManager(manager) {
 		if (!manager) throw 'Missing parameters';

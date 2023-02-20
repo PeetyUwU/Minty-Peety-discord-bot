@@ -54,6 +54,7 @@ class UsersManager extends EventEmitter {
 		let user = new User(member);
 		this.users.push(user);
 		this.updateDatabase();
+		this.emit('add', user);
 	}
 
 	/**
@@ -126,6 +127,7 @@ class UsersManager extends EventEmitter {
 	 */
 	updateDatabase() {
 		fs.writeFileSync(this.fileName, JSON.stringify(this.users, null, 2));
+		return this;
 	}
 
 	/**
@@ -162,7 +164,6 @@ class User {
 		} else {
 			guild = member.guilds;
 		}
-		let games = member.games || {};
 		let user = member.user || {};
 
 		this.id = member.id;
@@ -177,12 +178,6 @@ class User {
 			},
 		};
 	}
-
-	addGuild() {}
-
-	marry() {}
-
-	divorce() {}
 }
 
 module.exports = UsersManager;

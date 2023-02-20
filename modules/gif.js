@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+const GifTypes = {
+	Blush: 'blush',
+	Punch: 'punch',
+};
+
 class Gif {
 	/**
 	 *
@@ -56,4 +61,4 @@ class Gif {
 	}
 }
 
-module.exports = Gif;
+module.exports = { Gif, GifTypes };
