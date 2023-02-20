@@ -182,4 +182,4 @@ class Bot extends EventEmitter {
 
 module.exports = { Bot, EventList };
 
-new Bot('Test', 'client');
+new Bot();
