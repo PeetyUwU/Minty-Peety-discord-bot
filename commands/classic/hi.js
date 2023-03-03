@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'hi',
 	description: 'Sends hi',
-	cooldown: 0,
+	cooldown: 5,
 	userPerms: [],
 	botPerms: [],
 	run: async (client, message, author, guild, channel, args, opts) => {

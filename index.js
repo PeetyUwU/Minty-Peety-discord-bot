@@ -1,4 +1,33 @@
 const fs = require('fs');
+const consoleColors = {
+	Reset: '\x1b[0m',
+	Bright: '\x1b[1m',
+	Dim: '\x1b[2m',
+	Underscore: '\x1b[4m',
+	Blink: '\x1b[5m',
+	Reverse: '\x1b[7m',
+	Hidden: '\x1b[8m',
+	//
+	FgBlack: '\x1b[30m',
+	FgRed: '\x1b[31m',
+	FgGreen: '\x1b[32m',
+	FgYellow: '\x1b[33m',
+	FgBlue: '\x1b[34m',
+	FgMagenta: '\x1b[35m',
+	FgCyan: '\x1b[36m',
+	FgWhite: '\x1b[37m',
+	FgGray: '\x1b[90m',
+	//
+	BgBlack: '\x1b[40m',
+	BgRed: '\x1b[41m',
+	BgGreen: '\x1b[42m',
+	BgYellow: '\x1b[43m',
+	BgBlue: '\x1b[44m',
+	BgMagenta: '\x1b[45m',
+	BgCyan: '\x1b[46m',
+	BgWhite: '\x1b[47m',
+	BgGray: '\x1b[100m',
+};
 
 //! Documentation
 
@@ -123,6 +152,8 @@ const opts = {
 
 module.exports = { opts };
 
+const intCooldowns = new Map();
+
 client.on('interactionCreate', async (interaction) => {
 	try {
 		if (!interaction.isChatInputCommand()) return;
@@ -136,6 +167,34 @@ client.on('interactionCreate', async (interaction) => {
 			return;
 		}
 
+		if (!intCooldowns.has(command.name)) {
+			intCooldowns.set(command.name, new Discord.Collection());
+		}
+
+		const current_time = Date.now();
+		const time_stamps = intCooldowns.get(command.name);
+		const cooldown_ammount = command.cooldown * 1000;
+
+		if (time_stamps.has(interaction.member.id)) {
+			const expiracion_time =
+				time_stamps.get(interaction.member.id) + cooldown_ammount;
+
+			if (current_time < expiracion_time) {
+				const time_left = (expiracion_time - current_time) / 1000;
+
+				return interaction.reply(
+					`Please wait \`${time_left.toFixed(1)}\` before using ${
+						command.name
+					}!!`
+				);
+			}
+		}
+
+		time_stamps.set(interaction.member.id, current_time);
+		setTimeout(() => {
+			time_stamps.delete(interaction.member.id);
+		}, cooldown_ammount);
+
 		await command.execute(interaction, opts);
 	} catch (error) {
 		console.error(error);
@@ -147,7 +206,13 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.on('ready', () => {
-	console.log('Bot is ready!   ' + client.user.tag);
+	console.log(
+		consoleColors.FgYellow,
+		'Bot is ready!   ',
+		consoleColors.FgGreen,
+		client.user.tag,
+		consoleColors.Reset
+	);
 
 	client.guilds.cache.each((guild) => {
 		guild.members.cache.forEach((member) => {
@@ -228,7 +293,11 @@ for (const file of commandFiles) {
 		}
 	} else {
 		console.log(
-			`[WARNING] The command at ${filePath} is missing a required "name" or "run" property.`
+			consoleColors.FgRed,
+			'[WARNING]',
+			consoleColors.Reset,
+			`The command at ${filePath} is missing a required "data" or "execute" property.`,
+			consoleColors.Reset
 		);
 	}
 }
@@ -248,10 +317,16 @@ for (const file of commandFiles2) {
 		client.interactions.set(command.data.name, command);
 	} else {
 		console.log(
-			`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
+			consoleColors.FgRed,
+			'[WARNING]',
+			consoleColors.Reset,
+			`The command at ${filePath} is missing a required "data" or "execute" property.`,
+			consoleColors.Reset
 		);
 	}
 }
+
+const cooldowns = new Map();
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return;
@@ -274,6 +349,34 @@ client.on('messageCreate', async (message) => {
 			);
 			return;
 		}
+
+		if (!cooldowns.has(command.name)) {
+			cooldowns.set(command.name, new Discord.Collection());
+		}
+
+		const current_time = Date.now();
+		const time_stamps = cooldowns.get(command.name);
+		const cooldown_ammount = command.cooldown * 1000;
+
+		if (time_stamps.has(author.id)) {
+			const expiracion_time =
+				time_stamps.get(author.id) + cooldown_ammount;
+
+			if (current_time < expiracion_time) {
+				const time_left = (expiracion_time - current_time) / 1000;
+
+				return message.reply(
+					`Please wait \`${time_left.toFixed(1)}\` before using ${
+						command.name
+					}!!`
+				);
+			}
+		}
+
+		time_stamps.set(author.id, current_time);
+		setTimeout(() => {
+			time_stamps.delete(author.id);
+		}, cooldown_ammount);
 
 		await command.run(client, message, author, guild, channel, args, opts);
 	} catch (error) {

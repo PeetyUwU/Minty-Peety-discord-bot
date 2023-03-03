@@ -7,7 +7,7 @@ module.exports = {
 	async execute(interaction, opts) {
 		let nyanlings = opts.userManager.getNyanlings(interaction.user.id);
 		return interaction.reply(
-			`<@${interaction.user.id}>, you have ${nyanlings} Nyanlings🪙`
+			`<@${interaction.user.id}>, you have ${nyanlings} Nyanlings <:nyanlings:1081124606263443567>`
 		);
 	},
 };

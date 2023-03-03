@@ -4,6 +4,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription('lists all command'),
+	cooldown: 3,
 	async execute(interaction, opts) {
 		let Embed = new opts.EmbedBuilder({
 			color: 0xff0000,

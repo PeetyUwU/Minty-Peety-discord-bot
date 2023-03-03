@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'guessanime',
 	description: 'Mini-game guess anime',
-	cooldown: 0,
+	cooldown: 20,
 	userPerms: [],
 	botPerms: [],
 	run: async (client, message, author, guild, channel, args, opts) => {

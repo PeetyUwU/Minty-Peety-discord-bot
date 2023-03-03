@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'help',
 	description: 'Help command',
-	cooldown: 0,
+	cooldown: 3,
 	userPerms: [],
 	botPerms: [],
 	run: async (client, message, author, guild, channel, args, opts) => {

@@ -11,6 +11,6 @@ module.exports = {
 		});
 
 		list.join(', ');
-		return channel.send(list);
+		return channel.send(list[0] || list);
 	},
 };

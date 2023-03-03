@@ -162,7 +162,7 @@ class GuessAnime {
 			array1 = array1.filter((element) => {
 				return element !== '' && element !== ' ';
 			});
-			array2 = array1.filter((element) => {
+			array2 = array2.filter((element) => {
 				return element !== '' && element !== ' ';
 			});
 
@@ -174,6 +174,7 @@ class GuessAnime {
 			if (sortedString1 == sortedString2) {
 				animeFound = true;
 				characters = a.characters;
+				return;
 			}
 		});
 

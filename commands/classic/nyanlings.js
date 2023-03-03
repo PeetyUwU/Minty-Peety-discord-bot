@@ -7,6 +7,8 @@ module.exports = {
 	alias: ['cash'],
 	run: async (client, message, author, guild, channel, args, opts) => {
 		let nyanlings = opts.userManager.getNyanlings(author.id);
-		return message.reply(`You have ${nyanlings} Nyanlings🪙`);
+		return message.reply(
+			`You have ${nyanlings} Nyanlings <:nyanlings:1081124606263443567>`
+		);
 	},
 };
